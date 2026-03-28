@@ -1,0 +1,260 @@
+/* Placeholder: footer.css */
+/* ========================================
+   AutoNova - Footer Styles
+   Стили подвала сайта
+   ======================================== */
+
+/* ===== Footer Main ===== */
+.footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.footer__main {
+    padding: var(--spacing-12) 0;
+}
+
+.footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: var(--spacing-8);
+}
+
+/* Footer Column */
+.footer__column {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__column--about {
+    padding-right: var(--spacing-8);
+}
+
+/* Footer Logo */
+.footer__logo {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: var(--spacing-4);
+}
+
+.footer__logo-text {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+}
+
+.footer__logo-text span {
+    color: var(--color-accent);
+}
+
+/* About Text */
+.footer__about-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-400);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-6);
+}
+
+/* Social Links */
+.footer__social {
+    display: flex;
+    gap: var(--spacing-3);
+}
+
+.footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary-light);
+    border-radius: var(--border-radius-full);
+    color: var(--color-white);
+    transition: var(--transition-colors);
+}
+
+.footer__social-link:hover {
+    background-color: var(--color-accent);
+}
+
+.footer__social-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Footer Title */
+.footer__title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-4);
+}
+
+/* Footer Links */
+.footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.footer__links a {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-400);
+    transition: var(--transition-colors);
+}
+
+.footer__links a:hover {
+    color: var(--color-white);
+}
+
+/* Footer Contacts */
+.footer__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.footer__contacts li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-400);
+}
+
+.footer__contacts svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--color-accent);
+}
+
+.footer__contacts a {
+    color: var(--color-gray-400);
+    transition: var(--transition-colors);
+}
+
+.footer__contacts a:hover {
+    color: var(--color-white);
+}
+
+/* ===== Footer Bottom ===== */
+.footer__bottom {
+    padding: var(--spacing-4) 0;
+    border-top: 1px solid var(--color-primary-light);
+}
+
+.footer__bottom-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+}
+
+.footer__copyright {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+}
+
+.footer__bottom-links {
+    display: flex;
+    gap: var(--spacing-6);
+}
+
+.footer__bottom-links a {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    transition: var(--transition-colors);
+}
+
+.footer__bottom-links a:hover {
+    color: var(--color-white);
+}
+
+/* Payment Methods */
+.footer__payment {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.footer__payment img {
+    height: 24px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: var(--transition-all);
+}
+
+.footer__payment img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* ===== Responsive Footer ===== */
+@media (max-width: 992px) {
+    .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer__column--about {
+        grid-column: span 2;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer__main {
+        padding: var(--spacing-8) 0;
+    }
+    
+    .footer__grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+    }
+    
+    .footer__column--about {
+        grid-column: span 1;
+        text-align: center;
+    }
+    
+    .footer__social {
+        justify-content: center;
+    }
+    
+    .footer__column {
+        text-align: center;
+    }
+    
+    .footer__contacts li {
+        justify-content: center;
+    }
+    
+    .footer__bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer__bottom-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-4);
+    }
+    
+    .footer__payment {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer__grid {
+        gap: var(--spacing-6);
+    }
+    
+    .footer__title {
+        font-size: var(--font-size-sm);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-wide);
+    }
+}

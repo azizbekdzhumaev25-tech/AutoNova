@@ -1,0 +1,1705 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Доставка и оплата в AutoNova. Бесплатная доставка от 5000 ₽. Курьер, самовывоз, экспресс. Все способы оплаты.">
+    <title>Доставка и оплата - AutoNova</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23e94560' rx='15' width='100' height='100'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='50' font-weight='bold'>A</text></svg>">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* ===== Delivery Page ===== */
+        .delivery-page {
+            padding: var(--spacing-6) 0 var(--spacing-16);
+        }
+
+        /* Hero */
+        .delivery-hero {
+            position: relative;
+            padding: var(--spacing-10) var(--spacing-8);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: var(--border-radius-2xl);
+            color: var(--color-white);
+            margin-bottom: var(--spacing-12);
+            overflow: hidden;
+        }
+
+        .delivery-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .delivery-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: 5%;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(233,69,96,0.15) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .delivery-hero__content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-8);
+        }
+
+        .delivery-hero__text {
+            flex: 1;
+        }
+
+        .delivery-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-2) var(--spacing-4);
+            background-color: rgba(255,255,255,0.15);
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .delivery-hero__badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .delivery-hero__title {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: var(--font-weight-bold);
+            line-height: var(--line-height-tight);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .delivery-hero__subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            max-width: 520px;
+            line-height: var(--line-height-relaxed);
+        }
+
+        .delivery-hero__stats {
+            display: flex;
+            gap: var(--spacing-6);
+            flex-shrink: 0;
+        }
+
+        .delivery-hero__stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-5);
+            background-color: rgba(255,255,255,0.1);
+            border-radius: var(--border-radius-xl);
+            min-width: 130px;
+        }
+
+        .delivery-hero__stat-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255,255,255,0.15);
+            border-radius: var(--border-radius-full);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .delivery-hero__stat-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .delivery-hero__stat-value {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-extrabold);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .delivery-hero__stat-label {
+            font-size: var(--font-size-xs);
+            opacity: 0.7;
+        }
+
+        /* ===== Section ===== */
+        .delivery-section {
+            margin-bottom: var(--spacing-12);
+        }
+
+        .delivery-section__header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .delivery-section__icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-radius: var(--border-radius-xl);
+            flex-shrink: 0;
+        }
+
+        .delivery-section__icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .delivery-section__title-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .delivery-section__title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .delivery-section__subtitle {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-top: var(--spacing-1);
+        }
+
+        /* ===== Delivery Cards ===== */
+        .delivery-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-5);
+        }
+
+        .delivery-card {
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-6);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-all);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .delivery-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .delivery-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .delivery-card:hover::before {
+            opacity: 1;
+        }
+
+        .delivery-card--courier::before { background: linear-gradient(90deg, #2196f3, #1976d2); }
+        .delivery-card--pickup::before { background: linear-gradient(90deg, #4caf50, #388e3c); }
+        .delivery-card--express::before { background: linear-gradient(90deg, var(--color-accent), #ff6b6b); }
+
+        .delivery-card__top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .delivery-card__icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-colors);
+        }
+
+        .delivery-card--courier .delivery-card__icon {
+            background-color: rgba(33, 150, 243, 0.1);
+            color: #1976d2;
+        }
+        .delivery-card--pickup .delivery-card__icon {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #388e3c;
+        }
+        .delivery-card--express .delivery-card__icon {
+            background-color: rgba(233, 69, 96, 0.1);
+            color: var(--color-accent);
+        }
+
+        .delivery-card:hover .delivery-card__icon {
+            color: var(--color-white);
+        }
+        .delivery-card--courier:hover .delivery-card__icon { background-color: #1976d2; }
+        .delivery-card--pickup:hover .delivery-card__icon { background-color: #388e3c; }
+        .delivery-card--express:hover .delivery-card__icon { background-color: var(--color-accent); }
+
+        .delivery-card__icon svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .delivery-card__price-tag {
+            padding: var(--spacing-1) var(--spacing-3);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            border-radius: var(--border-radius-full);
+        }
+
+        .delivery-card__price-tag--free {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--color-success-dark);
+        }
+
+        .delivery-card__price-tag--paid {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .delivery-card__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .delivery-card__description {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--spacing-5);
+        }
+
+        .delivery-card__features {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-3);
+            flex: 1;
+        }
+
+        .delivery-card__feature {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .delivery-card__feature-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            flex-shrink: 0;
+        }
+
+        .delivery-card__feature-icon svg {
+            width: 16px;
+            height: 16px;
+            color: var(--color-success);
+        }
+
+        .delivery-card__footer {
+            margin-top: var(--spacing-5);
+            padding-top: var(--spacing-4);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .delivery-card__time {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .delivery-card__time svg {
+            width: 16px;
+            height: 16px;
+            color: var(--color-primary);
+        }
+
+        /* ===== Pricing Table ===== */
+        .pricing-table-wrapper {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pricing-table thead {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .pricing-table th {
+            padding: var(--spacing-4) var(--spacing-5);
+            text-align: left;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .pricing-table td {
+            padding: var(--spacing-4) var(--spacing-5);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .pricing-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table tbody tr {
+            transition: var(--transition-colors);
+        }
+
+        .pricing-table tbody tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .pricing-table__method {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+        }
+
+        .pricing-table__method-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            color: var(--color-primary);
+            flex-shrink: 0;
+        }
+
+        .pricing-table__method-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .pricing-table__free {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            padding: 2px 8px;
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--color-success-dark);
+            font-weight: var(--font-weight-semibold);
+            border-radius: var(--border-radius-sm);
+            font-size: var(--font-size-xs);
+        }
+
+        .pricing-table__free svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* ===== Info Notice ===== */
+        .info-notice {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-4);
+            padding: var(--spacing-5);
+            border-radius: var(--border-radius-xl);
+            margin: var(--spacing-6) 0;
+        }
+
+        .info-notice--info {
+            background-color: rgba(33, 150, 243, 0.06);
+            border: 1px solid rgba(33, 150, 243, 0.15);
+        }
+
+        .info-notice--success {
+            background-color: rgba(76, 175, 80, 0.06);
+            border: 1px solid rgba(76, 175, 80, 0.15);
+        }
+
+        .info-notice--warning {
+            background-color: rgba(255, 152, 0, 0.06);
+            border: 1px solid rgba(255, 152, 0, 0.15);
+        }
+
+        .info-notice__icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius-full);
+            flex-shrink: 0;
+        }
+
+        .info-notice--info .info-notice__icon {
+            background-color: rgba(33, 150, 243, 0.1);
+            color: var(--color-info);
+        }
+
+        .info-notice--success .info-notice__icon {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--color-success);
+        }
+
+        .info-notice--warning .info-notice__icon {
+            background-color: rgba(255, 152, 0, 0.1);
+            color: var(--color-warning);
+        }
+
+        .info-notice__icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .info-notice__content {
+            flex: 1;
+        }
+
+        .info-notice__title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .info-notice__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* ===== Process Steps ===== */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-5);
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: calc(12.5% + 24px);
+            right: calc(12.5% + 24px);
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--color-primary) 0, var(--color-primary) 8px, transparent 8px, transparent 16px);
+            z-index: 0;
+        }
+
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-step__number {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            border-radius: var(--border-radius-full);
+            margin-bottom: var(--spacing-4);
+            box-shadow: 0 4px 14px rgba(26, 26, 46, 0.25);
+            position: relative;
+        }
+
+        .process-step__number::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: var(--border-radius-full);
+            border: 2px solid rgba(26, 26, 46, 0.1);
+        }
+
+        .process-step__title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .process-step__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+            max-width: 220px;
+        }
+
+        /* ===== Payment Methods ===== */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-4);
+        }
+
+        .payment-card {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-4);
+            padding: var(--spacing-5);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-all);
+        }
+
+        .payment-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .payment-card__icon {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-xl);
+            flex-shrink: 0;
+            color: var(--color-primary);
+            transition: var(--transition-colors);
+        }
+
+        .payment-card:hover .payment-card__icon {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .payment-card__icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .payment-card__content {
+            flex: 1;
+        }
+
+        .payment-card__title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .payment-card__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .payment-card__badges {
+            display: flex;
+            gap: var(--spacing-2);
+            margin-top: var(--spacing-2);
+            flex-wrap: wrap;
+        }
+
+        .payment-card__badge {
+            padding: 2px 8px;
+            font-size: 10px;
+            font-weight: var(--font-weight-bold);
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            border-radius: var(--border-radius-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== FAQ ===== */
+        .delivery-faq {
+            margin-bottom: var(--spacing-12);
+        }
+
+        .faq-accordion {
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item__question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: var(--spacing-5) var(--spacing-6);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: var(--transition-colors);
+            gap: var(--spacing-4);
+        }
+
+        .faq-item__question:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .faq-item__icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-full);
+            flex-shrink: 0;
+            transition: var(--transition-all);
+        }
+
+        .faq-item__icon svg {
+            width: 14px;
+            height: 14px;
+            color: var(--text-tertiary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-item__icon {
+            background-color: var(--color-primary);
+        }
+
+        .faq-item.active .faq-item__icon svg {
+            color: var(--color-white);
+            transform: rotate(180deg);
+        }
+
+        .faq-item__answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-item__answer {
+            max-height: 500px;
+        }
+
+        .faq-item__answer-content {
+            padding: 0 var(--spacing-6) var(--spacing-5);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .faq-item__answer-content a {
+            color: var(--text-link);
+        }
+
+        .faq-item__answer-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== CTA ===== */
+        .delivery-cta {
+            position: relative;
+            padding: var(--spacing-10);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: var(--border-radius-2xl);
+            color: var(--color-white);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .delivery-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -15%;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .delivery-cta__content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .delivery-cta__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .delivery-cta__text {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            margin-bottom: var(--spacing-6);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .delivery-cta__buttons {
+            display: flex;
+            gap: var(--spacing-3);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .delivery-cta__buttons .btn--white {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+            border-color: var(--color-white);
+        }
+
+        .delivery-cta__buttons .btn--white:hover {
+            background-color: var(--color-gray-100);
+        }
+
+        .delivery-cta__buttons .btn--outline-white {
+            background: transparent;
+            color: var(--color-white);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .delivery-cta__buttons .btn--outline-white:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-color: var(--color-white);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1200px) {
+            .delivery-hero__stats {
+                flex-direction: column;
+                gap: var(--spacing-3);
+            }
+
+            .delivery-hero__stat {
+                min-width: auto;
+                flex-direction: row;
+                gap: var(--spacing-3);
+                text-align: left;
+            }
+
+            .delivery-hero__stat-icon {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .delivery-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .delivery-hero__content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .delivery-hero__subtitle {
+                margin: 0 auto;
+            }
+
+            .delivery-hero__stats {
+                flex-direction: row;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .delivery-hero__stat {
+                flex-direction: column;
+                text-align: center;
+                flex: 1;
+            }
+
+            .delivery-hero__stat-icon {
+                margin-bottom: var(--spacing-2);
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .delivery-hero {
+                padding: var(--spacing-8) var(--spacing-5);
+            }
+
+            .delivery-hero__title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .delivery-hero__stats {
+                flex-wrap: wrap;
+            }
+
+            .delivery-hero__stat {
+                min-width: 120px;
+            }
+
+            .pricing-table-wrapper {
+                overflow-x: auto;
+            }
+
+            .pricing-table {
+                min-width: 600px;
+            }
+
+            .delivery-cta {
+                padding: var(--spacing-8) var(--spacing-5);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-4);
+            }
+
+            .process-step {
+                flex-direction: row;
+                text-align: left;
+                gap: var(--spacing-4);
+            }
+
+            .process-step__number {
+                margin-bottom: 0;
+                width: 48px;
+                height: 48px;
+                font-size: var(--font-size-base);
+                flex-shrink: 0;
+            }
+
+            .process-step__text {
+                max-width: none;
+            }
+
+            .delivery-hero__stats {
+                flex-direction: column;
+            }
+
+            .delivery-hero__stat {
+                flex-direction: row;
+                text-align: left;
+                gap: var(--spacing-3);
+            }
+
+            .delivery-hero__stat-icon {
+                margin-bottom: 0;
+            }
+
+            .delivery-cta__buttons {
+                flex-direction: column;
+            }
+
+            .delivery-cta__buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ===== Header ===== -->
+                <header class="header">
+            <div class="header__top-bar">
+                <div class="container">
+                    <div class="header__top-links">
+                        <a href="about.html" class="header__top-link">О компании</a>
+                        <a href="delivery.html" class="header__top-link">Доставка</a>
+                        <a href="contacts.html" class="header__top-link">Контакты</a>
+                    </div>
+                    <div class="header__promo">
+                        <span class="header__promo-text">🚗 Бесплатная доставка от 5000 ₽</span>
+                    </div>
+                    <div class="header__top-links">
+                        <a href="tel:+78001234567" class="header__top-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            8 (800) 123-45-67
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header__main">
+                <div class="container">
+                    <button class="header__mobile-toggle" aria-label="Меню">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+
+                    <a href="index.html" class="header__logo">
+                        <div class="header__logo-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M16 8l-8 8"></path>
+                                <path d="M8 8l8 8"></path>
+                            </svg>
+                        </div>
+                        <span class="header__logo-text">Auto<span>Nova</span></span>
+                    </a>
+
+                    <div class="header__search">
+                        <form class="search-form" action="catalog.html" method="GET">
+                            <div class="search-form__input-wrapper">
+                                <input type="search" name="search" class="search-form__input" placeholder="Поиск товаров..." autocomplete="off">
+                                <div class="search-form__suggestions"></div>
+                            </div>
+                            <button type="submit" class="search-form__button" aria-label="Искать">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="M21 21l-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="header__actions">
+                        <a href="favorites.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span class="header__action-badge" data-favorites-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                        <a href="cart.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <span class="header__action-badge" data-cart-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="header__nav">
+                <div class="container">
+                    <div class="nav-categories">
+                        <button class="nav-categories__toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                            Каталог товаров
+                        </button>
+                        <div class="nav-categories__menu">
+                            <ul class="nav-categories__list" id="nav-categories-list"></ul>
+                        </div>
+                    </div>
+                    <nav class="nav-main">
+                        <a href="catalog.html" class="nav-main__link">Все товары</a>
+                        <a href="catalog.html?badges=sale" class="nav-main__link nav-main__link--highlight">Распродажа</a>
+                        <a href="catalog.html?badges=new" class="nav-main__link">Новинки</a>
+                        <a href="catalog.html?badges=bestseller" class="nav-main__link">Хиты продаж</a>
+                    </nav>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="mobile-menu__header">
+                <span class="header__logo-text">Auto<span>Nova</span></span>
+                <button class="mobile-menu__close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+            </div>
+            <nav class="mobile-menu__nav">
+                <div class="mobile-menu__section">
+                    <a href="catalog.html" class="mobile-menu__link">Каталог</a>
+                    <a href="favorites.html" class="mobile-menu__link">Избранное</a>
+                    <a href="cart.html" class="mobile-menu__link">Корзина</a>
+                </div>
+                <div class="mobile-menu__section">
+                    <a href="delivery.html" class="mobile-menu__link">Доставка и оплата</a>
+                    <a href="contacts.html" class="mobile-menu__link">Контакты</a>
+                    <a href="about.html" class="mobile-menu__link">О компании</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- ===== Main Content ===== -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Breadcrumbs -->
+                <nav class="breadcrumbs">
+                    <span class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Главная</a><span class="breadcrumbs__separator">/</span></span>
+                    <span class="breadcrumbs__item"><span class="breadcrumbs__current">Доставка и оплата</span></span>
+                </nav>
+
+                <div class="delivery-page">
+                    <!-- ===== Hero ===== -->
+                    <div class="delivery-hero">
+                        <div class="delivery-hero__content">
+                            <div class="delivery-hero__text">
+                                <div class="delivery-hero__badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                                    Доставка по всей России
+                                </div>
+                                <h1 class="delivery-hero__title">Доставка и оплата</h1>
+                                <p class="delivery-hero__subtitle">Доставляем автоаксессуары по всей России. Бесплатная доставка при заказе от 5 000 ₽. Несколько удобных способов оплаты.</p>
+                            </div>
+                            <div class="delivery-hero__stats">
+                                <div class="delivery-hero__stat">
+                                    <div class="delivery-hero__stat-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <div class="delivery-hero__stat-value">0 ₽</div>
+                                    <div class="delivery-hero__stat-label">от 5 000 ₽</div>
+                                </div>
+                                <div class="delivery-hero__stat">
+                                    <div class="delivery-hero__stat-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                    </div>
+                                    <div class="delivery-hero__stat-value">1-3 дня</div>
+                                    <div class="delivery-hero__stat-label">Москва и МО</div>
+                                </div>
+                                <div class="delivery-hero__stat">
+                                    <div class="delivery-hero__stat-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    </div>
+                                    <div class="delivery-hero__stat-value">5 000+</div>
+                                    <div class="delivery-hero__stat-label">пунктов выдачи</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Delivery Options ===== -->
+                    <div class="delivery-section">
+                        <div class="delivery-section__header">
+                            <div class="delivery-section__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </div>
+                            <div class="delivery-section__title-group">
+                                <h2 class="delivery-section__title">Способы доставки</h2>
+                                <p class="delivery-section__subtitle">Выберите удобный способ получения заказа</p>
+                            </div>
+                        </div>
+
+                        <div class="delivery-cards">
+                            <!-- Courier -->
+                            <div class="delivery-card delivery-card--courier">
+                                <div class="delivery-card__top">
+                                    <div class="delivery-card__icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                                    </div>
+                                    <span class="delivery-card__price-tag delivery-card__price-tag--free">от 0 ₽</span>
+                                </div>
+                                <h3 class="delivery-card__title">Курьерская доставка</h3>
+                                <p class="delivery-card__description">Доставка курьером до двери в удобное для вас время. Возможность осмотра и примерки при получении.</p>
+                                <div class="delivery-card__features">
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Москва и МО: 1-2 рабочих дня</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Другие города: 3-7 рабочих дней</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Бесплатно при заказе от 5 000 ₽</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>SMS/email уведомления о статусе</span>
+                                    </div>
+                                </div>
+                                <div class="delivery-card__footer">
+                                    <div class="delivery-card__time">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        Отправка в день заказа (до 15:00)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pickup -->
+                            <div class="delivery-card delivery-card--pickup">
+                                <div class="delivery-card__top">
+                                    <div class="delivery-card__icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    </div>
+                                    <span class="delivery-card__price-tag delivery-card__price-tag--free">Бесплатно</span>
+                                </div>
+                                <h3 class="delivery-card__title">Самовывоз</h3>
+                                <p class="delivery-card__description">Заберите заказ из ближайшего пункта выдачи. Более 5 000 точек по всей России.</p>
+                                <div class="delivery-card__features">
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Более 5 000 пунктов выдачи</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Хранение 7 дней бесплатно</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Всегда бесплатно при любой сумме</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Проверка товара при получении</span>
+                                    </div>
+                                </div>
+                                <div class="delivery-card__footer">
+                                    <div class="delivery-card__time">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        Готово к выдаче через 2-5 дней
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Express -->
+                            <div class="delivery-card delivery-card--express">
+                                <div class="delivery-card__top">
+                                    <div class="delivery-card__icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                                    </div>
+                                    <span class="delivery-card__price-tag delivery-card__price-tag--paid">590 ₽</span>
+                                </div>
+                                <h3 class="delivery-card__title">Экспресс-доставка</h3>
+                                <p class="delivery-card__description">Срочная доставка в день заказа. Идеально, когда товар нужен прямо сейчас.</p>
+                                <div class="delivery-card__features">
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Москва: доставка сегодня</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>При заказе до 14:00</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Точный 2-часовой интервал</span>
+                                    </div>
+                                    <div class="delivery-card__feature">
+                                        <div class="delivery-card__feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <span>Звонок курьера за 30 минут</span>
+                                    </div>
+                                </div>
+                                <div class="delivery-card__footer">
+                                    <div class="delivery-card__time">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                                        Доставка за 2-4 часа
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Pricing Table ===== -->
+                    <div class="delivery-section">
+                        <div class="delivery-section__header">
+                            <div class="delivery-section__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            </div>
+                            <div class="delivery-section__title-group">
+                                <h2 class="delivery-section__title">Стоимость доставки</h2>
+                                <p class="delivery-section__subtitle">Подробная таблица цен и сроков</p>
+                            </div>
+                        </div>
+
+                        <div class="pricing-table-wrapper">
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th>Способ доставки</th>
+                                        <th>Регион</th>
+                                        <th>Сроки</th>
+                                        <th>Стоимость</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="pricing-table__method">
+                                                <div class="pricing-table__method-icon">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                                                </div>
+                                                Курьер
+                                            </div>
+                                        </td>
+                                        <td>Москва и МО</td>
+                                        <td>1-2 рабочих дня</td>
+                                        <td><span class="pricing-table__free"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Бесплатно от 5 000 ₽</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="pricing-table__method">
+                                                <div class="pricing-table__method-icon">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                                                </div>
+                                                Курьер
+                                            </div>
+                                        </td>
+                                        <td>Санкт-Петербург</td>
+                                        <td>2-3 рабочих дня</td>
+                                        <td><span class="pricing-table__free"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Бесплатно от 5 000 ₽</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="pricing-table__method">
+                                                <div class="pricing-table__method-icon">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                                                </div>
+                                                Курьер
+                                            </div>
+                                        </td>
+                                        <td>Другие города</td>
+                                        <td>3-7 рабочих дней</td>
+                                        <td>350 ₽ (бесплатно от 5 000 ₽)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="pricing-table__method">
+                                                <div class="pricing-table__method-icon">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                                </div>
+                                                Самовывоз
+                                            </div>
+                                        </td>
+                                        <td>Вся Россия</td>
+                                        <td>2-5 рабочих дней</td>
+                                        <td><span class="pricing-table__free"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Всегда бесплатно</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="pricing-table__method">
+                                                <div class="pricing-table__method-icon">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                                                </div>
+                                                Экспресс
+                                            </div>
+                                        </td>
+                                        <td>Москва</td>
+                                        <td>Сегодня</td>
+                                        <td>590 ₽</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="pricing-table__method">
+                                                <div class="pricing-table__method-icon">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                                </div>
+                                                Почта России
+                                            </div>
+                                        </td>
+                                        <td>Вся Россия</td>
+                                        <td>5-14 рабочих дней</td>
+                                        <td>От 250 ₽</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="info-notice info-notice--success">
+                            <div class="info-notice__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <div class="info-notice__content">
+                                <div class="info-notice__title">Бесплатная доставка от 5 000 ₽</div>
+                                <p class="info-notice__text">При заказе от 5 000 ₽ доставка курьером по всей России бесплатна. Самовывоз из пунктов выдачи всегда бесплатен, независимо от суммы заказа.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== How It Works ===== -->
+                    <div class="delivery-section">
+                        <div class="delivery-section__header">
+                            <div class="delivery-section__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                            </div>
+                            <div class="delivery-section__title-group">
+                                <h2 class="delivery-section__title">Как оформить заказ</h2>
+                                <p class="delivery-section__subtitle">4 простых шага до получения товара</p>
+                            </div>
+                        </div>
+
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="process-step__number">1</div>
+                                <div>
+                                    <h4 class="process-step__title">Выберите товары</h4>
+                                    <p class="process-step__text">Добавьте нужные товары в корзину. Используйте фильтры и поиск для быстрого подбора.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="process-step__number">2</div>
+                                <div>
+                                    <h4 class="process-step__title">Оформите заказ</h4>
+                                    <p class="process-step__text">Заполните контактные данные, выберите способ доставки и оплаты. Применяйте промокоды.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="process-step__number">3</div>
+                                <div>
+                                    <h4 class="process-step__title">Подтверждение</h4>
+                                    <p class="process-step__text">Наш менеджер свяжется с вами для подтверждения в течение 30 минут в рабочее время.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="process-step__number">4</div>
+                                <div>
+                                    <h4 class="process-step__title">Доставка</h4>
+                                    <p class="process-step__text">Получите SMS с трек-номером. Отслеживайте заказ в личном кабинете или на сайте ТК.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Payment Methods ===== -->
+                    <div class="delivery-section">
+                        <div class="delivery-section__header">
+                            <div class="delivery-section__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            </div>
+                            <div class="delivery-section__title-group">
+                                <h2 class="delivery-section__title">Способы оплаты</h2>
+                                <p class="delivery-section__subtitle">Выберите удобный способ оплаты заказа</p>
+                            </div>
+                        </div>
+
+                        <div class="payment-grid">
+                            <div class="payment-card">
+                                <div class="payment-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                </div>
+                                <div class="payment-card__content">
+                                    <h4 class="payment-card__title">Банковская карта</h4>
+                                    <p class="payment-card__text">Безопасная оплата через защищённое соединение. Поддерживаем 3D Secure для дополнительной безопасности.</p>
+                                    <div class="payment-card__badges">
+                                        <span class="payment-card__badge">Visa</span>
+                                        <span class="payment-card__badge">Mastercard</span>
+                                        <span class="payment-card__badge">МИР</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-card">
+                                <div class="payment-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                                </div>
+                                <div class="payment-card__content">
+                                    <h4 class="payment-card__title">СБП (Система быстрых платежей)</h4>
+                                    <p class="payment-card__text">Мгновенная оплата через приложение вашего банка по QR-коду. Без комиссии.</p>
+                                    <div class="payment-card__badges">
+                                        <span class="payment-card__badge">QR-код</span>
+                                        <span class="payment-card__badge">Мгновенно</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-card">
+                                <div class="payment-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><circle cx="12" cy="12" r="3"></circle></svg>
+                                </div>
+                                <div class="payment-card__content">
+                                    <h4 class="payment-card__title">Наличными при получении</h4>
+                                    <p class="payment-card__text">Оплатите заказ курьеру или в пункте выдачи наличными или картой. Без предоплаты.</p>
+                                    <div class="payment-card__badges">
+                                        <span class="payment-card__badge">Наличные</span>
+                                        <span class="payment-card__badge">Карта</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-card">
+                                <div class="payment-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                </div>
+                                <div class="payment-card__content">
+                                    <h4 class="payment-card__title">Счёт для юридических лиц</h4>
+                                    <p class="payment-card__text">Выставим счёт на оплату для организаций. Работаем с НДС и без НДС. Полный пакет документов.</p>
+                                    <div class="payment-card__badges">
+                                        <span class="payment-card__badge">Безнал</span>
+                                        <span class="payment-card__badge">НДС</span>
+                                        <span class="payment-card__badge">Акты</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-notice info-notice--info">
+                            <div class="info-notice__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            </div>
+                            <div class="info-notice__content">
+                                <div class="info-notice__title">Безопасность платежей</div>
+                                <p class="info-notice__text">Все онлайн-платежи обрабатываются через защищённые платёжные шлюзы с SSL-шифрованием. Мы не храним данные ваших банковских карт на нашем сервере.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== FAQ ===== -->
+                    <div class="delivery-faq">
+                        <div class="delivery-section__header">
+                            <div class="delivery-section__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            </div>
+                            <div class="delivery-section__title-group">
+                                <h2 class="delivery-section__title">Вопросы по доставке</h2>
+                                <p class="delivery-section__subtitle">Ответы на популярные вопросы</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-accordion">
+                            <div class="faq-item">
+                                <button class="faq-item__question">
+                                    Как отследить мой заказ?
+                                    <span class="faq-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                                </button>
+                                <div class="faq-item__answer">
+                                    <div class="faq-item__answer-content">После отправки заказа вы получите SMS и email с трек-номером. Отслеживать заказ можно по трек-номеру на сайте транспортной компании или позвонив нам по телефону.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-item__question">
+                                    Можно ли изменить адрес доставки после оформления?
+                                    <span class="faq-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                                </button>
+                                <div class="faq-item__answer">
+                                    <div class="faq-item__answer-content">Да, адрес можно изменить до момента отправки заказа. Для этого позвоните нам по телефону <a href="tel:+78001234567">8 (800) 123-45-67</a> или напишите в чат поддержки. После отправки изменить адрес, к сожалению, уже нельзя.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-item__question">
+                                    Что делать, если товар не подошёл?
+                                    <span class="faq-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                                </button>
+                                <div class="faq-item__answer">
+                                    <div class="faq-item__answer-content">Вы можете вернуть или обменять товар в течение 14 дней с момента получения. Свяжитесь с нами по телефону или напишите на почту для оформления возврата.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-item__question">
+                                    Доставляете ли вы в другие страны?
+                                    <span class="faq-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                                </button>
+                                <div class="faq-item__answer">
+                                    <div class="faq-item__answer-content">На данный момент мы осуществляем доставку только по территории Российской Федерации, включая Крым и отдалённые регионы. Доставка в страны СНГ планируется в ближайшем будущем.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-item__question">
+                                    Как получить бесплатную доставку?
+                                    <span class="faq-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                                </button>
+                                <div class="faq-item__answer">
+                                    <div class="faq-item__answer-content">Бесплатная доставка курьером доступна при заказе от 5 000 ₽. Самовывоз из пункта выдачи всегда бесплатен, независимо от суммы заказа. Также вы можете воспользоваться промокодами для получения скидки на доставку.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== CTA ===== -->
+                    <div class="delivery-cta">
+                        <div class="delivery-cta__content">
+                            <h3 class="delivery-cta__title">Остались вопросы по доставке?</h3>
+                            <p class="delivery-cta__text">Наши консультанты помогут подобрать оптимальный способ доставки и ответят на все вопросы</p>
+                            <div class="delivery-cta__buttons">
+                                <a href="tel:+78001234567" class="btn btn--lg btn--white">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    8 (800) 123-45-67
+                                </a>
+                                <a href="contacts.html" class="btn btn--lg btn--outline-white">Написать нам</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== Footer ===== -->
+        <footer class="footer">
+            <div class="footer__main">
+                <div class="container">
+                    <div class="footer__grid">
+                        <div class="footer__column footer__column--about">
+                            <a href="index.html" class="footer__logo"><span class="footer__logo-text">Auto<span>Nova</span></span></a>
+                            <p class="footer__about-text">Интернет-магазин автоаксессуаров с 2015 года. Более 10 000 товаров для вашего автомобиля.</p>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Каталог</h4>
+                            <ul class="footer__links">
+                                <li><a href="catalog.html?category=kovriki">Коврики</a></li>
+                                <li><a href="catalog.html?category=elektronika">Электроника</a></li>
+                                <li><a href="catalog.html?category=osveschenie">Освещение</a></li>
+                                <li><a href="catalog.html">Все товары</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Покупателям</h4>
+                            <ul class="footer__links">
+                                <li><a href="delivery.html">Доставка и оплата</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Контакты</h4>
+                            <ul class="footer__contacts">
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <a href="tel:+78001234567">8 (800) 123-45-67</a>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <a href="mailto:info@autonova.ru">info@autonova.ru</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="container">
+                    <div class="footer__bottom-content">
+                        <p class="footer__copyright">© 2024 AutoNova. Все права защищены.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== Scripts ===== -->
+    <!-- Данные -->
+    <script src="js/data/products.js"></script>
+    <script src="js/data/categories.js"></script>
+    <script src="js/data/reviews.js"></script>
+
+    <!-- Утилиты -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/formatters.js"></script>
+
+    <!-- Ядро -->
+    <script src="js/core/storage.js"></script>
+    <script src="js/core/app.js"></script>
+
+    <!-- Модули -->
+    <script src="js/modules/notifications.js"></script>
+    <script src="js/modules/cart.js"></script>
+    <script src="js/modules/favorites.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // FAQ Accordion
+        document.querySelectorAll('.faq-item__question').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.closest('.faq-item');
+                const isActive = item.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(faq => faq.classList.remove('active'));
+                
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.delivery-card, .process-step, .payment-card, .faq-item').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `opacity 0.5s ease ${i * 80}ms, transform 0.5s ease ${i * 80}ms`;
+            observer.observe(el);
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1581 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="О компании AutoNova — крупнейший интернет-магазин автоаксессуаров в России с 2015 года. 10 000+ товаров, 50 000+ клиентов.">
+    <title>О компании - AutoNova</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23e94560' rx='15' width='100' height='100'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='50' font-weight='bold'>A</text></svg>">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        /* ===== About Page ===== */
+        .about-page {
+            padding: var(--spacing-6) 0 var(--spacing-16);
+        }
+
+        /* ===== Hero ===== */
+        .about-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-12);
+            align-items: center;
+            margin-bottom: var(--spacing-16);
+            padding-bottom: var(--spacing-16);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .about-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-2) var(--spacing-4);
+            background-color: rgba(233, 69, 96, 0.1);
+            color: var(--color-accent);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            border-radius: var(--border-radius-full);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .about-hero__badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .about-hero__title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-5);
+            line-height: var(--line-height-tight);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+
+        .about-hero__title span {
+            background: linear-gradient(135deg, var(--color-accent) 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-hero__text {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .about-hero__text strong {
+            color: var(--text-primary);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .about-hero__actions {
+            display: flex;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+        }
+
+        .about-hero__image {
+            position: relative;
+        }
+
+        .about-hero__image-main {
+            width: 100%;
+            border-radius: var(--border-radius-2xl);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .about-hero__image-float {
+            position: absolute;
+            bottom: -24px;
+            left: -24px;
+            width: 200px;
+            padding: var(--spacing-5);
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+        }
+
+        .about-hero__image-float-row {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+        }
+
+        .about-hero__image-float-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--color-success);
+            border-radius: var(--border-radius-lg);
+            flex-shrink: 0;
+        }
+
+        .about-hero__image-float-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .about-hero__image-float-value {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .about-hero__image-float-label {
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+        }
+
+        /* ===== Stats ===== */
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-6);
+            margin-bottom: var(--spacing-16);
+        }
+
+        .about-stat {
+            text-align: center;
+            padding: var(--spacing-6) var(--spacing-4);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-all);
+        }
+
+        .about-stat:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .about-stat__icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto var(--spacing-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-full);
+            color: var(--color-primary);
+        }
+
+        .about-stat__icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .about-stat__value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-extrabold);
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .about-stat__label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        /* ===== Mission ===== */
+        .about-mission {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-12);
+            align-items: center;
+            margin-bottom: var(--spacing-16);
+            padding: var(--spacing-10);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-2xl);
+        }
+
+        .about-mission__label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .about-mission__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-4);
+            line-height: var(--line-height-tight);
+        }
+
+        .about-mission__text {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .about-mission__text p {
+            margin-bottom: var(--spacing-4);
+        }
+
+        .about-mission__text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-mission__image {
+            position: relative;
+        }
+
+        .about-mission__image img {
+            width: 100%;
+            border-radius: var(--border-radius-xl);
+        }
+
+        .about-mission__quote {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            max-width: 300px;
+            padding: var(--spacing-5);
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+        }
+
+        .about-mission__quote-text {
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            font-style: italic;
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .about-mission__quote-text::before {
+            content: '«';
+            color: var(--color-accent);
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .about-mission__quote-text::after {
+            content: '»';
+            color: var(--color-accent);
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .about-mission__quote-author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+        }
+
+        .about-mission__quote-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .about-mission__quote-name {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .about-mission__quote-role {
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+        }
+
+        /* ===== Values ===== */
+        .about-values {
+            margin-bottom: var(--spacing-16);
+        }
+
+        .about-values__header {
+            text-align: center;
+            margin-bottom: var(--spacing-10);
+        }
+
+        .about-values__label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .about-values__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .about-values__subtitle {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-6);
+        }
+
+        .value-card {
+            padding: var(--spacing-8);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-all);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .value-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        .value-card__icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-xl);
+            margin-bottom: var(--spacing-5);
+            color: var(--color-primary);
+            transition: var(--transition-colors);
+        }
+
+        .value-card:hover .value-card__icon {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .value-card__icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .value-card__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .value-card__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* ===== Timeline / History ===== */
+        .about-history {
+            margin-bottom: var(--spacing-16);
+        }
+
+        .about-history__header {
+            text-align: center;
+            margin-bottom: var(--spacing-10);
+        }
+
+        .about-history__label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .about-history__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .history-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: var(--spacing-10);
+        }
+
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
+        }
+
+        .history-item {
+            position: relative;
+            padding-bottom: var(--spacing-8);
+        }
+
+        .history-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .history-item__dot {
+            position: absolute;
+            left: calc(-1 * var(--spacing-10) + 10px);
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--color-primary);
+            border-radius: var(--border-radius-full);
+            border: 4px solid var(--bg-primary);
+            box-shadow: 0 0 0 2px var(--color-primary);
+            z-index: 1;
+        }
+
+        .history-item__year {
+            display: inline-block;
+            padding: var(--spacing-1) var(--spacing-3);
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            border-radius: var(--border-radius-full);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .history-item__title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .history-item__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* ===== Team ===== */
+        .about-team {
+            margin-bottom: var(--spacing-16);
+        }
+
+        .about-team__header {
+            text-align: center;
+            margin-bottom: var(--spacing-10);
+        }
+
+        .about-team__label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .about-team__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .about-team__subtitle {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-6);
+        }
+
+        .team-card {
+            text-align: center;
+            padding: var(--spacing-6);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-all);
+        }
+
+        .team-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .team-card__avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto var(--spacing-4);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: var(--color-white);
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-semibold);
+            box-shadow: 0 8px 24px rgba(26, 26, 46, 0.25);
+        }
+
+        .team-card__name {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .team-card__role {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .team-card__socials {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-2);
+        }
+
+        .team-card__social {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-full);
+            color: var(--text-tertiary);
+            transition: var(--transition-colors);
+        }
+
+        .team-card__social:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .team-card__social svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ===== Partners ===== */
+        .about-partners {
+            margin-bottom: var(--spacing-16);
+        }
+
+        .about-partners__header {
+            text-align: center;
+            margin-bottom: var(--spacing-8);
+        }
+
+        .about-partners__label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .about-partners__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: var(--spacing-4);
+        }
+
+        .partner-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-5);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            min-height: 80px;
+            transition: var(--transition-all);
+        }
+
+        .partner-logo:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .partner-logo__text {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+            transition: var(--transition-colors);
+        }
+
+        .partner-logo:hover .partner-logo__text {
+            color: var(--text-primary);
+        }
+
+        /* ===== Testimonials ===== */
+        .about-testimonials {
+            margin-bottom: var(--spacing-16);
+        }
+
+        .about-testimonials__header {
+            text-align: center;
+            margin-bottom: var(--spacing-10);
+        }
+
+        .about-testimonials__label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .about-testimonials__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-6);
+        }
+
+        .testimonial-card {
+            padding: var(--spacing-6);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-card__stars {
+            display: flex;
+            gap: 2px;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .testimonial-card__stars svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--color-rating);
+        }
+
+        .testimonial-card__text {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--spacing-5);
+            flex: 1;
+        }
+
+        .testimonial-card__author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            padding-top: var(--spacing-4);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .testimonial-card__avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            color: var(--color-white);
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            flex-shrink: 0;
+        }
+
+        .testimonial-card__name {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .testimonial-card__meta {
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+        }
+
+        /* ===== CTA ===== */
+        .about-cta {
+            position: relative;
+            padding: var(--spacing-12);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: var(--border-radius-2xl);
+            color: var(--color-white);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .about-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .about-cta::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.2) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .about-cta__content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-cta__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .about-cta__text {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            margin-bottom: var(--spacing-8);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-cta__buttons {
+            display: flex;
+            gap: var(--spacing-3);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .about-cta__buttons .btn--white {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+            border-color: var(--color-white);
+        }
+
+        .about-cta__buttons .btn--white:hover {
+            background-color: var(--color-gray-100);
+        }
+
+        .about-cta__buttons .btn--outline-white {
+            background-color: transparent;
+            color: var(--color-white);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .about-cta__buttons .btn--outline-white:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-white);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1200px) {
+            .partners-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: var(--spacing-8);
+            }
+
+            .about-hero__actions {
+                justify-content: center;
+            }
+
+            .about-hero__image-float {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -20px;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-mission {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-mission__quote {
+                position: static;
+                max-width: 100%;
+                margin-top: var(--spacing-4);
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero__image-float {
+                display: none;
+            }
+
+            .about-mission {
+                padding: var(--spacing-6);
+            }
+
+            .about-cta {
+                padding: var(--spacing-8) var(--spacing-5);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-3);
+            }
+
+            .about-stat {
+                padding: var(--spacing-4) var(--spacing-3);
+            }
+
+            .about-stat__value {
+                font-size: var(--font-size-xl);
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .value-card {
+                padding: var(--spacing-5);
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-3);
+            }
+
+            .team-card {
+                padding: var(--spacing-4);
+            }
+
+            .team-card__avatar {
+                width: 72px;
+                height: 72px;
+                font-size: var(--font-size-lg);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-cta__title {
+                font-size: var(--font-size-xl);
+            }
+
+            .about-cta__buttons {
+                flex-direction: column;
+            }
+
+            .about-cta__buttons .btn {
+                width: 100%;
+            }
+
+            .history-timeline {
+                padding-left: var(--spacing-8);
+            }
+
+            .history-item__dot {
+                left: calc(-1 * var(--spacing-8) + 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ===== Header ===== -->
+                <header class="header">
+            <div class="header__top-bar">
+                <div class="container">
+                    <div class="header__top-links">
+                        <a href="about.html" class="header__top-link">О компании</a>
+                        <a href="delivery.html" class="header__top-link">Доставка</a>
+                        <a href="contacts.html" class="header__top-link">Контакты</a>
+                    </div>
+                    <div class="header__promo">
+                        <span class="header__promo-text">🚗 Бесплатная доставка от 5000 ₽</span>
+                    </div>
+                    <div class="header__top-links">
+                        <a href="tel:+78001234567" class="header__top-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            8 (800) 123-45-67
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header__main">
+                <div class="container">
+                    <button class="header__mobile-toggle" aria-label="Меню">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+
+                    <a href="index.html" class="header__logo">
+                        <div class="header__logo-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M16 8l-8 8"></path>
+                                <path d="M8 8l8 8"></path>
+                            </svg>
+                        </div>
+                        <span class="header__logo-text">Auto<span>Nova</span></span>
+                    </a>
+
+                    <div class="header__search">
+                        <form class="search-form" action="catalog.html" method="GET">
+                            <div class="search-form__input-wrapper">
+                                <input type="search" name="search" class="search-form__input" placeholder="Поиск товаров..." autocomplete="off">
+                                <div class="search-form__suggestions"></div>
+                            </div>
+                            <button type="submit" class="search-form__button" aria-label="Искать">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="M21 21l-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="header__actions">
+                        <a href="favorites.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span class="header__action-badge" data-favorites-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                        <a href="cart.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <span class="header__action-badge" data-cart-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="header__nav">
+                <div class="container">
+                    <div class="nav-categories">
+                        <button class="nav-categories__toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                            Каталог товаров
+                        </button>
+                        <div class="nav-categories__menu">
+                            <ul class="nav-categories__list" id="nav-categories-list"></ul>
+                        </div>
+                    </div>
+                    <nav class="nav-main">
+                        <a href="catalog.html" class="nav-main__link">Все товары</a>
+                        <a href="catalog.html?badges=sale" class="nav-main__link nav-main__link--highlight">Распродажа</a>
+                        <a href="catalog.html?badges=new" class="nav-main__link">Новинки</a>
+                        <a href="catalog.html?badges=bestseller" class="nav-main__link">Хиты продаж</a>
+                    </nav>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ===== Mobile Menu ===== -->
+        <div class="mobile-menu">
+            <div class="mobile-menu__header">
+                <span class="header__logo-text">Auto<span>Nova</span></span>
+                <button class="mobile-menu__close" aria-label="Закрыть">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <nav class="mobile-menu__nav">
+                <div class="mobile-menu__section">
+                    <a href="catalog.html" class="mobile-menu__link">Каталог</a>
+                    <a href="favorites.html" class="mobile-menu__link">Избранное</a>
+                    <a href="cart.html" class="mobile-menu__link">Корзина</a>
+                </div>
+                <div class="mobile-menu__section">
+                    <a href="delivery.html" class="mobile-menu__link">Доставка и оплата</a>
+                    <a href="contacts.html" class="mobile-menu__link">Контакты</a>
+                    <a href="about.html" class="mobile-menu__link">О компании</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- ===== Main Content ===== -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Breadcrumbs -->
+                <nav class="breadcrumbs">
+                    <span class="breadcrumbs__item">
+                        <a href="index.html" class="breadcrumbs__link">Главная</a>
+                        <span class="breadcrumbs__separator">/</span>
+                    </span>
+                    <span class="breadcrumbs__item">
+                        <span class="breadcrumbs__current">О компании</span>
+                    </span>
+                </nav>
+
+                <div class="about-page">
+                    <!-- ===== Hero ===== -->
+                    <div class="about-hero">
+                        <div>
+                            <div class="about-hero__badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                С 2015 года на рынке
+                            </div>
+                            <h1 class="about-hero__title">Мы — <span>AutoNova</span></h1>
+                            <p class="about-hero__text">
+                                Крупнейший интернет-магазин автоаксессуаров в России. Мы помогаем <strong>более 50 000 автовладельцам</strong> находить качественные аксессуары по разумным ценам. Наша миссия — сделать ваш автомобиль комфортнее, безопаснее и красивее.
+                            </p>
+                            <div class="about-hero__actions">
+                                <a href="catalog.html" class="btn btn--primary btn--lg">Перейти в каталог</a>
+                                <a href="contacts.html" class="btn btn--outline btn--lg">Связаться с нами</a>
+                            </div>
+                        </div>
+                        <div class="about-hero__image">
+                            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=700" alt="AutoNova — автоаксессуары" class="about-hero__image-main">
+                            <div class="about-hero__image-float">
+                                <div class="about-hero__image-float-row">
+                                    <div class="about-hero__image-float-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <div>
+                                        <div class="about-hero__image-float-value">50 000+</div>
+                                        <div class="about-hero__image-float-label">довольных клиентов</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Stats ===== -->
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="about-stat__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                            </div>
+                            <div class="about-stat__value">10 000+</div>
+                            <div class="about-stat__label">Товаров в каталоге</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div class="about-stat__value">50 000+</div>
+                            <div class="about-stat__label">Довольных клиентов</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                            <div class="about-stat__value">9 лет</div>
+                            <div class="about-stat__label">На рынке</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                            </div>
+                            <div class="about-stat__value">4.8 ★</div>
+                            <div class="about-stat__label">Средний рейтинг</div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Mission ===== -->
+                    <div class="about-mission">
+                        <div>
+                            <div class="about-mission__label">Наша миссия</div>
+                            <h2 class="about-mission__title">Делаем автомобили комфортнее</h2>
+                            <div class="about-mission__text">
+                                <p>Мы верим, что каждый автомобиль заслуживает лучших аксессуаров. Поэтому мы тщательно отбираем товары, проверяем качество каждой партии и предлагаем только то, что используем сами.</p>
+                                <p>Наша команда экспертов ежедневно тестирует новинки рынка автоаксессуаров, чтобы вы получали проверенные, надёжные и функциональные решения для своего автомобиля.</p>
+                                <p>Мы не просто продаём товары — мы помогаем сделать правильный выбор. Каждый менеджер знает продукцию изнутри и готов дать профессиональную консультацию.</p>
+                            </div>
+                        </div>
+                        <div class="about-mission__image">
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600" alt="Наша миссия">
+                            <div class="about-mission__quote">
+                                <p class="about-mission__quote-text">Наша цель — не просто продать товар, а помочь клиенту найти идеальное решение для его автомобиля</p>
+                                <div class="about-mission__quote-author">
+                                    <div class="about-mission__quote-avatar">АС</div>
+                                    <div>
+                                        <div class="about-mission__quote-name">Алексей Смирнов</div>
+                                        <div class="about-mission__quote-role">Основатель AutoNova</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Values ===== -->
+                    <div class="about-values">
+                        <div class="about-values__header">
+                            <div class="about-values__label">Почему мы</div>
+                            <h2 class="about-values__title">Наши ценности и принципы</h2>
+                            <p class="about-values__subtitle">Шесть причин, почему клиенты выбирают AutoNova</p>
+                        </div>
+                        <div class="values-grid">
+                            <div class="value-card">
+                                <div class="value-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                                </div>
+                                <h3 class="value-card__title">Проверенное качество</h3>
+                                <p class="value-card__text">Работаем только с проверенными производителями. Каждый товар проходит контроль качества перед отправкой покупателю.</p>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                </div>
+                                <h3 class="value-card__title">Клиент на первом месте</h3>
+                                <p class="value-card__text">Индивидуальный подход к каждому клиенту. Профессиональные консультации и поддержка 24/7 без выходных.</p>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                                </div>
+                                <h3 class="value-card__title">Молниеносная доставка</h3>
+                                <p class="value-card__text">Отправляем заказы в день оформления. Экспресс-доставка за 2 часа по Москве. Бесплатно от 5 000 ₽.</p>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                </div>
+                                <h3 class="value-card__title">Простой возврат</h3>
+                                <p class="value-card__text">14 дней на возврат без вопросов. Если товар не подошёл — вернём деньги полностью. Быстро и без бюрократии.</p>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                </div>
+                                <h3 class="value-card__title">Честные цены</h3>
+                                <p class="value-card__text">Прямые поставки от производителей без посредников. Регулярные акции, скидки до 30% и программа лояльности.</p>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                </div>
+                                <h3 class="value-card__title">Экспертные консультации</h3>
+                                <p class="value-card__text">Наши менеджеры — автоэнтузиасты, которые знают каждый товар. Подберём идеальные аксессуары под ваш автомобиль.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== History ===== -->
+                    <div class="about-history">
+                        <div class="about-history__header">
+                            <div class="about-history__label">Наш путь</div>
+                            <h2 class="about-history__title">История компании</h2>
+                        </div>
+                        <div class="history-timeline">
+                            <div class="history-item">
+                                <div class="history-item__dot"></div>
+                                <span class="history-item__year">2015</span>
+                                <h4 class="history-item__title">Основание компании</h4>
+                                <p class="history-item__text">AutoNova начала свою работу как небольшой интернет-магазин автоковриков. Первый склад площадью 50 м² и команда из 3 человек.</p>
+                            </div>
+                            <div class="history-item">
+                                <div class="history-item__dot"></div>
+                                <span class="history-item__year">2017</span>
+                                <h4 class="history-item__title">Расширение ассортимента</h4>
+                                <p class="history-item__text">Добавили категории: чехлы, электроника, освещение. Каталог вырос до 3 000 товаров. Открыли первый пункт выдачи в Москве.</p>
+                            </div>
+                            <div class="history-item">
+                                <div class="history-item__dot"></div>
+                                <span class="history-item__year">2019</span>
+                                <h4 class="history-item__title">10 000 клиентов</h4>
+                                <p class="history-item__text">Преодолели отметку в 10 000 постоянных клиентов. Запустили программу лояльности и бесплатную доставку по России.</p>
+                            </div>
+                            <div class="history-item">
+                                <div class="history-item__dot"></div>
+                                <span class="history-item__year">2021</span>
+                                <h4 class="history-item__title">Собственный склад</h4>
+                                <p class="history-item__text">Переехали на новый склад площадью 2 000 м². Команда выросла до 35 сотрудников. Запустили экспресс-доставку по Москве.</p>
+                            </div>
+                            <div class="history-item">
+                                <div class="history-item__dot"></div>
+                                <span class="history-item__year">2023</span>
+                                <h4 class="history-item__title">Лидер рынка</h4>
+                                <p class="history-item__text">Вошли в ТОП-5 интернет-магазинов автоаксессуаров в России. Каталог превысил 10 000 товаров от 200+ брендов.</p>
+                            </div>
+                            <div class="history-item">
+                                <div class="history-item__dot"></div>
+                                <span class="history-item__year">2024</span>
+                                <h4 class="history-item__title">Новый этап развития</h4>
+                                <p class="history-item__text">Запуск обновлённого сайта, мобильного приложения и расширенной программы лояльности. 50 000+ довольных клиентов.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Team ===== -->
+                    <div class="about-team">
+                        <div class="about-team__header">
+                            <div class="about-team__label">Команда</div>
+                            <h2 class="about-team__title">Люди, которые делают AutoNova</h2>
+                            <p class="about-team__subtitle">Профессионалы, увлечённые автомобилями и сервисом</p>
+                        </div>
+                        <div class="team-grid">
+                            <div class="team-card">
+                                <div class="team-card__avatar">АС</div>
+                                <div class="team-card__name">Алексей Смирнов</div>
+                                <div class="team-card__role">Основатель и CEO</div>
+                                <div class="team-card__socials">
+                                    <a href="#" class="team-card__social">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                                    </a>
+                                    <a href="#" class="team-card__social">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-card__avatar">ЕК</div>
+                                <div class="team-card__name">Елена Козлова</div>
+                                <div class="team-card__role">Директор по продажам</div>
+                                <div class="team-card__socials">
+                                    <a href="#" class="team-card__social">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-card__avatar">ДМ</div>
+                                <div class="team-card__name">Дмитрий Морозов</div>
+                                <div class="team-card__role">Руководитель логистики</div>
+                                <div class="team-card__socials">
+                                    <a href="#" class="team-card__social">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-card__avatar">ОП</div>
+                                <div class="team-card__name">Ольга Петрова</div>
+                                <div class="team-card__role">Служба поддержки</div>
+                                <div class="team-card__socials">
+                                    <a href="#" class="team-card__social">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Partners ===== -->
+                    <div class="about-partners">
+                        <div class="about-partners__header">
+                            <div class="about-partners__label">Партнёры</div>
+                            <h2 class="about-partners__title">Работаем с лучшими брендами</h2>
+                        </div>
+                        <div class="partners-grid">
+                            <div class="partner-logo"><span class="partner-logo__text">AutoMaster</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">FloorGuard</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">SeatPro</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">TechDrive</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">LightForce</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">ProTools</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">ShineMaster</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">RadarShield</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">AirPump</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">SmartMount</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">AromaLux</span></div>
+                            <div class="partner-logo"><span class="partner-logo__text">MediaCar</span></div>
+                        </div>
+                    </div>
+
+                    <!-- ===== Testimonials ===== -->
+                    <div class="about-testimonials">
+                        <div class="about-testimonials__header">
+                            <div class="about-testimonials__label">Отзывы</div>
+                            <h2 class="about-testimonials__title">Что говорят наши клиенты</h2>
+                        </div>
+                        <div class="testimonials-grid">
+                            <div class="testimonial-card">
+                                <div class="testimonial-card__stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </div>
+                                <p class="testimonial-card__text">Заказываю в AutoNova уже третий год. Качество товаров всегда на высоте, а доставка быстрая. Отдельное спасибо менеджерам за консультации — помогли подобрать идеальные коврики для моего Camry.</p>
+                                <div class="testimonial-card__author">
+                                    <div class="testimonial-card__avatar">АК</div>
+                                    <div>
+                                        <div class="testimonial-card__name">Александр К.</div>
+                                        <div class="testimonial-card__meta">Toyota Camry • Москва</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-card__stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </div>
+                                <p class="testimonial-card__text">Купил видеорегистратор 4K — просто огонь! Качество картинки потрясающее. Доставили на следующий день, упаковано идеально. Рекомендую магазин всем друзьям.</p>
+                                <div class="testimonial-card__author">
+                                    <div class="testimonial-card__avatar">ИМ</div>
+                                    <div>
+                                        <div class="testimonial-card__name">Игорь М.</div>
+                                        <div class="testimonial-card__meta">BMW X5 • Санкт-Петербург</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-card__stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </div>
+                                <p class="testimonial-card__text">Оформляла возврат — процедура оказалась максимально простой. Деньги вернули на карту за 3 дня. Приятно работать с магазином, который ценит своих клиентов. Теперь покупаю только здесь.</p>
+                                <div class="testimonial-card__author">
+                                    <div class="testimonial-card__avatar">МС</div>
+                                    <div>
+                                        <div class="testimonial-card__name">Мария С.</div>
+                                        <div class="testimonial-card__meta">Hyundai Tucson • Краснодар</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== CTA ===== -->
+                    <div class="about-cta">
+                        <div class="about-cta__content">
+                            <h3 class="about-cta__title">Готовы к покупкам?</h3>
+                            <p class="about-cta__text">Более 10 000 товаров ждут вас в нашем каталоге. Бесплатная доставка от 5 000 ₽</p>
+                            <div class="about-cta__buttons">
+                                <a href="catalog.html" class="btn btn--lg btn--white">Перейти в каталог</a>
+                                <a href="contacts.html" class="btn btn--lg btn--outline-white">Связаться с нами</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== Footer ===== -->
+        <footer class="footer">
+            <div class="footer__main">
+                <div class="container">
+                    <div class="footer__grid">
+                        <div class="footer__column footer__column--about">
+                            <a href="index.html" class="footer__logo"><span class="footer__logo-text">Auto<span>Nova</span></span></a>
+                            <p class="footer__about-text">Интернет-магазин автоаксессуаров с 2015 года. Более 10 000 товаров для вашего автомобиля.</p>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Каталог</h4>
+                            <ul class="footer__links">
+                                <li><a href="catalog.html?category=kovriki">Коврики</a></li>
+                                <li><a href="catalog.html?category=chehly-i-nakidki">Чехлы и накидки</a></li>
+                                <li><a href="catalog.html?category=elektronika">Электроника</a></li>
+                                <li><a href="catalog.html?category=osveschenie">Освещение</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Покупателям</h4>
+                            <ul class="footer__links">
+                                <li><a href="delivery.html">Доставка и оплата</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Контакты</h4>
+                            <ul class="footer__contacts">
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <a href="tel:+78001234567">8 (800) 123-45-67</a>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <a href="mailto:info@autonova.ru">info@autonova.ru</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="container">
+                    <div class="footer__bottom-content">
+                        <p class="footer__copyright">© 2024 AutoNova. Все права защищены.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== Scripts ===== -->
+    <!-- Данные -->
+    <script src="js/data/products.js"></script>
+    <script src="js/data/categories.js"></script>
+    <script src="js/data/reviews.js"></script>
+
+    <!-- Утилиты -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/formatters.js"></script>
+
+    <!-- Ядро -->
+    <script src="js/core/storage.js"></script>
+    <script src="js/core/app.js"></script>
+
+    <!-- Модули -->
+    <script src="js/modules/notifications.js"></script>
+    <script src="js/modules/cart.js"></script>
+    <script src="js/modules/favorites.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/header.js"></script>
+    <script>
+        // Анимация счётчиков при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Наблюдаем за элементами
+            document.querySelectorAll('.about-stat, .value-card, .team-card, .history-item, .testimonial-card, .partner-logo').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(el);
+            });
+
+            // Добавляем задержку для последовательной анимации
+            document.querySelectorAll('.about-stat').forEach((el, i) => {
+                el.style.transitionDelay = `${i * 100}ms`;
+            });
+
+            document.querySelectorAll('.value-card').forEach((el, i) => {
+                el.style.transitionDelay = `${i * 80}ms`;
+            });
+
+            document.querySelectorAll('.team-card').forEach((el, i) => {
+                el.style.transitionDelay = `${i * 100}ms`;
+            });
+
+            document.querySelectorAll('.history-item').forEach((el, i) => {
+                el.style.transitionDelay = `${i * 150}ms`;
+            });
+
+            document.querySelectorAll('.partner-logo').forEach((el, i) => {
+                el.style.transitionDelay = `${i * 50}ms`;
+            });
+        });
+    </script>
+</body>
+</html>

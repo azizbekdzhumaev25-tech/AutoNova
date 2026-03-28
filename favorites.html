@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Избранные товары AutoNova. Сохраняйте понравившиеся автоаксессуары и быстро возвращайтесь к ним позже.">
+    <title>Избранное - AutoNova</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23e94560' rx='15' width='100' height='100'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='50' font-weight='bold'>A</text></svg>">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/catalog.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* ===== Favorites Page ===== */
+        .favorites-page {
+            padding: var(--spacing-6) 0 var(--spacing-16);
+        }
+
+        /* Header */
+        .favorites-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-8);
+        }
+
+        .favorites-header__info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+        }
+
+        .favorites-header__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            width: fit-content;
+            padding: var(--spacing-2) var(--spacing-4);
+            background-color: rgba(233, 69, 96, 0.1);
+            color: var(--color-accent);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            border-radius: var(--border-radius-full);
+        }
+
+        .favorites-header__badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .favorites-header__title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            line-height: var(--line-height-tight);
+        }
+
+        .favorites-header__subtitle {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: var(--line-height-relaxed);
+        }
+
+        .favorites-header__actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+        }
+
+        .favorites-header__count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 var(--spacing-3);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-white);
+            background-color: var(--color-primary);
+            border-radius: var(--border-radius-full);
+        }
+
+        /* Summary Bar */
+        .favorites-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            padding: var(--spacing-5) var(--spacing-6);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-xl);
+            margin-bottom: var(--spacing-8);
+            flex-wrap: wrap;
+        }
+
+        .favorites-summary__stats {
+            display: flex;
+            gap: var(--spacing-8);
+            flex-wrap: wrap;
+        }
+
+        .favorites-summary__stat {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-1);
+        }
+
+        .favorites-summary__label {
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+            color: var(--text-tertiary);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .favorites-summary__value {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .favorites-summary__value--accent {
+            color: var(--color-accent);
+        }
+
+        .favorites-summary__actions {
+            display: flex;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+        }
+
+        /* Toolbar */
+        .favorites-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+            flex-wrap: wrap;
+        }
+
+        .favorites-search {
+            position: relative;
+            flex: 1;
+            max-width: 360px;
+        }
+
+        .favorites-search__input {
+            width: 100%;
+            height: 44px;
+            padding: 0 var(--spacing-4) 0 44px;
+            font-size: var(--font-size-base);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            transition: var(--transition-colors);
+        }
+
+        .favorites-search__input:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.08);
+        }
+
+        .favorites-search__icon {
+            position: absolute;
+            left: var(--spacing-3);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: var(--text-tertiary);
+            pointer-events: none;
+        }
+
+        .favorites-filters {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+        }
+
+        .favorites-filter-btn {
+            padding: var(--spacing-2) var(--spacing-4);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-secondary);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-full);
+            cursor: pointer;
+            transition: var(--transition-all);
+        }
+
+        .favorites-filter-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--text-primary);
+        }
+
+        .favorites-filter-btn.active {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .favorites-sort {
+            min-width: 220px;
+        }
+
+        .favorites-sort__select {
+            width: 100%;
+            height: 44px;
+            padding: 0 var(--spacing-8) 0 var(--spacing-3);
+            font-size: var(--font-size-sm);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            background-color: var(--bg-primary);
+            cursor: pointer;
+            appearance: none;
+            transition: var(--transition-colors);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23757575' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+
+        .favorites-sort__select:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.08);
+        }
+
+        /* Results info */
+        .favorites-results {
+            margin-bottom: var(--spacing-4);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .favorites-results strong {
+            color: var(--text-primary);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        /* Grid */
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-4);
+        }
+
+        /* Enhanced Card */
+        .favorite-card {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+            transition: var(--transition-all);
+            position: relative;
+        }
+
+        .favorite-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .favorite-card__top {
+            position: relative;
+        }
+
+        .favorite-card__image {
+            display: block;
+            aspect-ratio: 1;
+            background-color: var(--bg-secondary);
+            overflow: hidden;
+        }
+
+        .favorite-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: var(--spacing-3);
+            transition: transform 0.3s ease;
+        }
+
+        .favorite-card:hover .favorite-card__image img {
+            transform: scale(1.04);
+        }
+
+        .favorite-card__badges {
+            position: absolute;
+            top: var(--spacing-3);
+            left: var(--spacing-3);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-1);
+        }
+
+        .favorite-card__badge {
+            padding: var(--spacing-1) var(--spacing-2);
+            font-size: 10px;
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            border-radius: var(--border-radius-sm);
+            color: var(--color-white);
+        }
+
+        .favorite-card__badge--sale { background-color: var(--color-accent); }
+        .favorite-card__badge--new { background-color: var(--color-success); }
+        .favorite-card__badge--bestseller { background-color: var(--color-warning-dark); }
+
+        .favorite-card__actions {
+            position: absolute;
+            top: var(--spacing-3);
+            right: var(--spacing-3);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+        }
+
+        .favorite-card__action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background-color: var(--bg-primary);
+            border: none;
+            border-radius: var(--border-radius-full);
+            box-shadow: var(--shadow-sm);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-colors);
+        }
+
+        .favorite-card__action:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .favorite-card__action--remove:hover {
+            background-color: var(--color-error);
+        }
+
+        .favorite-card__action svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .favorite-card__content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: var(--spacing-4);
+        }
+
+        .favorite-card__category {
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .favorite-card__title {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+            line-height: var(--line-height-snug);
+            margin-bottom: var(--spacing-2);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 2.8em;
+            transition: var(--transition-colors);
+        }
+
+        .favorite-card__title:hover {
+            color: var(--color-accent);
+        }
+
+        .favorite-card__rating {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .favorite-card__stars {
+            display: flex;
+            gap: 1px;
+        }
+
+        .favorite-card__stars svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--color-rating);
+        }
+
+        .favorite-card__stars svg.empty {
+            fill: var(--color-rating-empty);
+        }
+
+        .favorite-card__reviews {
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+        }
+
+        .favorite-card__availability {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            font-size: var(--font-size-xs);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .favorite-card__availability-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: var(--border-radius-full);
+        }
+
+        .favorite-card__availability--in-stock .favorite-card__availability-dot {
+            background-color: var(--color-success);
+        }
+
+        .favorite-card__availability--in-stock .favorite-card__availability-text {
+            color: var(--color-success);
+        }
+
+        .favorite-card__availability--low-stock .favorite-card__availability-dot {
+            background-color: var(--color-warning);
+        }
+
+        .favorite-card__availability--low-stock .favorite-card__availability-text {
+            color: var(--color-warning-dark);
+        }
+
+        .favorite-card__availability--out-of-stock .favorite-card__availability-dot {
+            background-color: var(--color-error);
+        }
+
+        .favorite-card__availability--out-of-stock .favorite-card__availability-text {
+            color: var(--color-error);
+        }
+
+        .favorite-card__price {
+            margin-top: auto;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .favorite-card__price-current {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .favorite-card__price-original {
+            font-size: var(--font-size-sm);
+            color: var(--text-tertiary);
+            text-decoration: line-through;
+            margin-left: var(--spacing-2);
+        }
+
+        .favorite-card__savings {
+            display: inline-flex;
+            margin-top: var(--spacing-1);
+            font-size: var(--font-size-xs);
+            color: var(--color-accent);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .favorite-card__footer {
+            display: flex;
+            gap: var(--spacing-2);
+            margin-top: auto;
+        }
+
+        .favorite-card__footer .btn {
+            flex: 1;
+        }
+
+        .favorite-card__footer .product-card__cart-actions {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .favorite-card__footer .product-card__cart-actions .btn {
+            flex: none;
+            width: 100%;
+        }
+
+        /* Compare / move controls */
+        .favorite-card__meta-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-3);
+            margin-top: auto;
+            padding-top: var(--spacing-3);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .favorite-card__added-date {
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+        }
+
+        .favorite-card__move {
+            font-size: var(--font-size-xs);
+            color: var(--text-link);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .favorite-card__move:hover {
+            text-decoration: underline;
+        }
+
+        /* Empty State */
+        .favorites-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--spacing-16) var(--spacing-4);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-2xl);
+        }
+
+        .favorites-empty__icon {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius-full);
+            color: var(--color-gray-300);
+            margin-bottom: var(--spacing-6);
+            box-shadow: var(--shadow-md);
+        }
+
+        .favorites-empty__icon svg {
+            width: 56px;
+            height: 56px;
+        }
+
+        .favorites-empty__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .favorites-empty__text {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            max-width: 460px;
+            margin-bottom: var(--spacing-6);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .favorites-empty__buttons {
+            display: flex;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Recommendations */
+        .favorites-recommendations {
+            margin-top: var(--spacing-12);
+        }
+
+        .favorites-recommendations__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-6);
+        }
+
+        .favorites-recommendations__title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .favorites-recommendations__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-4);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1200px) {
+            .favorites-grid,
+            .favorites-recommendations__grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .favorites-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .favorites-summary {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .favorites-summary__actions {
+                width: 100%;
+            }
+
+            .favorites-summary__actions .btn {
+                flex: 1;
+            }
+
+            .favorites-grid,
+            .favorites-recommendations__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .favorites-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .favorites-search {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .favorites-header__title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .favorites-summary__stats {
+                gap: var(--spacing-4);
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .favorites-filters {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                scrollbar-width: none;
+                padding-bottom: var(--spacing-1);
+            }
+
+            .favorites-filters::-webkit-scrollbar { display: none; }
+
+            .favorites-filter-btn {
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .favorites-grid,
+            .favorites-recommendations__grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-3);
+            }
+
+            .favorites-summary__stats {
+                flex-direction: column;
+                gap: var(--spacing-3);
+            }
+
+            .favorites-summary__actions {
+                flex-direction: column;
+            }
+
+            .favorites-summary__actions .btn,
+            .favorites-header__actions .btn {
+                width: 100%;
+            }
+
+            .favorites-header__actions {
+                width: 100%;
+            }
+
+            .favorites-empty__buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .favorites-empty__buttons .btn {
+                width: 100%;
+            }
+
+            .favorite-card__footer {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ===== Header ===== -->
+                <header class="header">
+            <div class="header__top-bar">
+                <div class="container">
+                    <div class="header__top-links">
+                        <a href="about.html" class="header__top-link">О компании</a>
+                        <a href="delivery.html" class="header__top-link">Доставка</a>
+                        <a href="contacts.html" class="header__top-link">Контакты</a>
+                    </div>
+                    <div class="header__promo">
+                        <span class="header__promo-text">🚗 Бесплатная доставка от 5000 ₽</span>
+                    </div>
+                    <div class="header__top-links">
+                        <a href="tel:+78001234567" class="header__top-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            8 (800) 123-45-67
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header__main">
+                <div class="container">
+                    <button class="header__mobile-toggle" aria-label="Меню">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+
+                    <a href="index.html" class="header__logo">
+                        <div class="header__logo-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M16 8l-8 8"></path>
+                                <path d="M8 8l8 8"></path>
+                            </svg>
+                        </div>
+                        <span class="header__logo-text">Auto<span>Nova</span></span>
+                    </a>
+
+                    <div class="header__search">
+                        <form class="search-form" action="catalog.html" method="GET">
+                            <div class="search-form__input-wrapper">
+                                <input type="search" name="search" class="search-form__input" placeholder="Поиск товаров..." autocomplete="off">
+                                <div class="search-form__suggestions"></div>
+                            </div>
+                            <button type="submit" class="search-form__button" aria-label="Искать">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="M21 21l-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="header__actions">
+                        <a href="favorites.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span class="header__action-badge" data-favorites-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                        <a href="cart.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <span class="header__action-badge" data-cart-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="header__nav">
+                <div class="container">
+                    <div class="nav-categories">
+                        <button class="nav-categories__toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                            Каталог товаров
+                        </button>
+                        <div class="nav-categories__menu">
+                            <ul class="nav-categories__list" id="nav-categories-list"></ul>
+                        </div>
+                    </div>
+                    <nav class="nav-main">
+                        <a href="catalog.html" class="nav-main__link">Все товары</a>
+                        <a href="catalog.html?badges=sale" class="nav-main__link nav-main__link--highlight">Распродажа</a>
+                        <a href="catalog.html?badges=new" class="nav-main__link">Новинки</a>
+                        <a href="catalog.html?badges=bestseller" class="nav-main__link">Хиты продаж</a>
+                    </nav>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="mobile-menu__header">
+                <span class="header__logo-text">Auto<span>Nova</span></span>
+                <button class="mobile-menu__close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+            </div>
+            <nav class="mobile-menu__nav">
+                <div class="mobile-menu__section">
+                    <a href="catalog.html" class="mobile-menu__link">Каталог</a>
+                    <a href="favorites.html" class="mobile-menu__link">Избранное</a>
+                    <a href="cart.html" class="mobile-menu__link">Корзина</a>
+                </div>
+                <div class="mobile-menu__section">
+                    <a href="delivery.html" class="mobile-menu__link">Доставка и оплата</a>
+                    <a href="contacts.html" class="mobile-menu__link">Контакты</a>
+                    <a href="about.html" class="mobile-menu__link">О компании</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- ===== Main Content ===== -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Breadcrumbs -->
+                <nav class="breadcrumbs">
+                    <span class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Главная</a><span class="breadcrumbs__separator">/</span></span>
+                    <span class="breadcrumbs__item"><span class="breadcrumbs__current">Избранное</span></span>
+                </nav>
+
+                <div class="favorites-page">
+                    <!-- Header -->
+                    <div class="favorites-header">
+                        <div class="favorites-header__info">
+                            <div class="favorites-header__badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                Ваши сохранённые товары
+                            </div>
+                            <h1 class="favorites-header__title">Избранное</h1>
+                            <p class="favorites-header__subtitle">Сохраняйте понравившиеся товары, чтобы быстро вернуться к ним позже и следить за изменением цен.</p>
+                        </div>
+                        <div class="favorites-header__actions">
+                            <span class="favorites-header__count" id="favorites-header-count">0</span>
+                            <button class="btn btn--outline" id="clear-favorites-btn" style="display: none;">
+                                Очистить всё
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="favorites-summary" id="favorites-summary" style="display: none;">
+                        <div class="favorites-summary__stats">
+                            <div class="favorites-summary__stat">
+                                <span class="favorites-summary__label">Всего товаров</span>
+                                <span class="favorites-summary__value" id="summary-total-count">0</span>
+                            </div>
+                            <div class="favorites-summary__stat">
+                                <span class="favorites-summary__label">Со скидкой</span>
+                                <span class="favorites-summary__value favorites-summary__value--accent" id="summary-sale-count">0</span>
+                            </div>
+                            <div class="favorites-summary__stat">
+                                <span class="favorites-summary__label">Средняя цена</span>
+                                <span class="favorites-summary__value" id="summary-average-price">0 ₽</span>
+                            </div>
+                        </div>
+                        <div class="favorites-summary__actions">
+                            <button class="btn btn--primary" id="add-all-to-cart-btn">Добавить всё в корзину</button>
+                        </div>
+                    </div>
+
+                    <!-- Toolbar -->
+                    <div class="favorites-toolbar" id="favorites-toolbar" style="display: none;">
+                        <div class="favorites-search">
+                            <svg class="favorites-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+                            <input type="text" class="favorites-search__input" id="favorites-search-input" placeholder="Найти в избранном...">
+                        </div>
+                        <div class="favorites-filters">
+                            <button class="favorites-filter-btn active" data-filter="all">Все</button>
+                            <button class="favorites-filter-btn" data-filter="sale">Со скидкой</button>
+                            <button class="favorites-filter-btn" data-filter="in-stock">В наличии</button>
+                        </div>
+                        <div class="favorites-sort">
+                            <select class="favorites-sort__select" id="favorites-sort-select">
+                                <option value="newest">Сначала добавленные</option>
+                                <option value="price_asc">Сначала дешевле</option>
+                                <option value="price_desc">Сначала дороже</option>
+                                <option value="rating">По рейтингу</option>
+                                <option value="discount">По скидке</option>
+                                <option value="name">По названию</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="favorites-results" id="favorites-results" style="display: none;"></div>
+
+                    <!-- Content -->
+                    <div id="favorites-content">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Recommendations -->
+                    <section class="favorites-recommendations" id="favorites-recommendations" style="display: none;">
+                        <div class="favorites-recommendations__header">
+                            <h2 class="favorites-recommendations__title">Может понравиться</h2>
+                            <a href="catalog.html" class="section-link">Смотреть все →</a>
+                        </div>
+                        <div class="favorites-recommendations__grid" id="favorites-recommendations-grid">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== Footer ===== -->
+        <footer class="footer">
+            <div class="footer__main">
+                <div class="container">
+                    <div class="footer__grid">
+                        <div class="footer__column footer__column--about">
+                            <a href="index.html" class="footer__logo"><span class="footer__logo-text">Auto<span>Nova</span></span></a>
+                            <p class="footer__about-text">Интернет-магазин автоаксессуаров с 2015 года. Более 10 000 товаров для вашего автомобиля.</p>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Каталог</h4>
+                            <ul class="footer__links">
+                                <li><a href="catalog.html?category=kovriki">Коврики</a></li>
+                                <li><a href="catalog.html?category=elektronika">Электроника</a></li>
+                                <li><a href="catalog.html?category=osveschenie">Освещение</a></li>
+                                <li><a href="catalog.html">Все товары</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Покупателям</h4>
+                            <ul class="footer__links">
+                                <li><a href="delivery.html">Доставка и оплата</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Контакты</h4>
+                            <ul class="footer__contacts">
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <a href="tel:+78001234567">8 (800) 123-45-67</a>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <a href="mailto:info@autonova.ru">info@autonova.ru</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="container"><p class="footer__copyright">© 2024 AutoNova. Все права защищены.</p></div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== Scripts ===== -->
+    <!-- Данные -->
+    <script src="js/data/products.js"></script>
+    <script src="js/data/categories.js"></script>
+    <script src="js/data/reviews.js"></script>
+
+    <!-- Утилиты -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/formatters.js"></script>
+
+    <!-- Ядро -->
+    <script src="js/core/storage.js"></script>
+    <script src="js/core/app.js"></script>
+
+    <!-- Модули -->
+    <script src="js/modules/notifications.js"></script>
+    <script src="js/modules/cart.js"></script>
+    <script src="js/modules/favorites.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let currentFilter = 'all';
+        let currentSort = 'newest';
+        let searchQuery = '';
+
+        const headerCountEl = document.getElementById('favorites-header-count');
+        const clearBtn = document.getElementById('clear-favorites-btn');
+        const summary = document.getElementById('favorites-summary');
+        const toolbar = document.getElementById('favorites-toolbar');
+        const resultsInfo = document.getElementById('favorites-results');
+        const content = document.getElementById('favorites-content');
+        const recommendationsSection = document.getElementById('favorites-recommendations');
+        const recommendationsGrid = document.getElementById('favorites-recommendations-grid');
+
+        function getFavoriteProducts() {
+            return Favorites.getAll().map(product => ({
+                ...product,
+                addedAt: Date.now() - (product.id * 1000000) // mock added date
+            }));
+        }
+
+        function filterProducts(products) {
+            let filtered = [...products];
+
+            if (currentFilter === 'sale') {
+                filtered = filtered.filter(p => p.discount > 0);
+            } else if (currentFilter === 'in-stock') {
+                filtered = filtered.filter(p => p.stockStatus === 'in_stock' || p.stockStatus === 'low_stock');
+            }
+
+            if (searchQuery) {
+                const q = searchQuery.toLowerCase();
+                filtered = filtered.filter(p =>
+                    p.name.toLowerCase().includes(q) ||
+                    p.tags.join(' ').toLowerCase().includes(q) ||
+                    (p.shortDescription && p.shortDescription.toLowerCase().includes(q))
+                );
+            }
+
+            return filtered;
+        }
+
+        function sortProducts(products) {
+            const sorted = [...products];
+            switch (currentSort) {
+                case 'price_asc':
+                    return sorted.sort((a, b) => a.price - b.price);
+                case 'price_desc':
+                    return sorted.sort((a, b) => b.price - a.price);
+                case 'rating':
+                    return sorted.sort((a, b) => b.rating - a.rating);
+                case 'discount':
+                    return sorted.sort((a, b) => b.discount - a.discount);
+                case 'name':
+                    return sorted.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+                case 'newest':
+                default:
+                    return sorted.sort((a, b) => b.addedAt - a.addedAt);
+            }
+        }
+
+        function getCategoryName(categoryId) {
+            const cat = CategoriesDB.getById(categoryId);
+            return cat ? cat.name : '';
+        }
+
+        function getAvailability(product) {
+            if (product.stockStatus === 'out_of_stock' || product.stock === 0) {
+                return { class: 'out-of-stock', text: 'Нет в наличии' };
+            }
+            if (product.stockStatus === 'low_stock') {
+                return { class: 'low-stock', text: `Осталось ${product.stock} шт.` };
+            }
+            return { class: 'in-stock', text: 'В наличии' };
+        }
+
+        function renderStars(rating) {
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                html += `<svg ${i > Math.round(rating) ? 'class="empty"' : ''} viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>`;
+            }
+            return html;
+        }
+
+        function renderProductCard(product) {
+            const hasDiscount = !!product.originalPrice && product.originalPrice > product.price;
+            const inCart = Cart.hasItem(product.id);
+            const availability = getAvailability(product);
+            const categoryName = getCategoryName(product.categoryId);
+            const savings = hasDiscount ? product.originalPrice - product.price : 0;
+
+            return `
+                <div class="favorite-card" data-product-id="${product.id}">
+                    <div class="favorite-card__top">
+                        <a href="product.html?id=${product.id}" class="favorite-card__image">
+                            <img src="${product.images[0]?.url || ''}" alt="${product.name}">
+                        </a>
+                        ${(product.badges && product.badges.length) ? `
+                            <div class="favorite-card__badges">
+                                ${product.badges.map(badge => {
+                                    if (badge === 'sale') return `<span class="favorite-card__badge favorite-card__badge--sale">-${product.discount}%</span>`;
+                                    if (badge === 'new') return `<span class="favorite-card__badge favorite-card__badge--new">Новинка</span>`;
+                                    if (badge === 'bestseller') return `<span class="favorite-card__badge favorite-card__badge--bestseller">Хит</span>`;
+                                    return '';
+                                }).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="favorite-card__actions">
+                            <button class="favorite-card__action favorite-card__action--remove" data-toggle-favorite="${product.id}" title="Удалить из избранного">
+                                <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="favorite-card__content">
+                        ${categoryName ? `<div class="favorite-card__category">${categoryName}</div>` : ''}
+                        <a href="product.html?id=${product.id}" class="favorite-card__title">${product.name}</a>
+                        <div class="favorite-card__rating">
+                            <div class="favorite-card__stars">${renderStars(product.rating)}</div>
+                            <span class="favorite-card__reviews">${product.reviewsCount} отзывов</span>
+                        </div>
+                        <div class="favorite-card__availability favorite-card__availability--${availability.class}">
+                            <span class="favorite-card__availability-dot"></span>
+                            <span class="favorite-card__availability-text">${availability.text}</span>
+                        </div>
+                        <div class="favorite-card__price">
+                            <span class="favorite-card__price-current">${Formatters.price(product.price)}</span>
+                            ${hasDiscount ? `<span class="favorite-card__price-original">${Formatters.price(product.originalPrice)}</span>` : ''}
+                            ${hasDiscount ? `<div class="favorite-card__savings">Экономия ${Formatters.price(savings)}</div>` : ''}
+                        </div>
+                        <div class="favorite-card__meta-actions">
+                            <span class="favorite-card__added-date">Добавлено недавно</span>
+                            <button class="favorite-card__move" data-move-to-cart="${product.id}">В корзину</button>
+                        </div>
+                        <div class="favorite-card__footer">
+                            <div class="product-card__cart-actions">
+                                <button type="button" class="btn btn--primary btn--sm btn--block ${inCart ? 'btn--success' : ''}"
+                                    data-add-to-cart="${product.id}"
+                                    data-not-in-cart-label="Добавить в корзину"
+                                    ${product.stockStatus === 'out_of_stock' ? 'disabled' : ''}>
+                                    ${inCart ? 'В корзине' : 'Добавить в корзину'}
+                                </button>
+                                <button type="button" class="btn btn--outline btn--sm btn--block cart-remove-inline" data-cart-remove="${product.id}" ${inCart ? '' : 'hidden'} aria-hidden="${inCart ? 'false' : 'true'}">Убрать из корзины</button>
+                            </div>
+                            <a href="product.html?id=${product.id}" class="btn btn--outline btn--sm">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSummary(products) {
+            const total = products.length;
+            const onSale = products.filter(p => p.discount > 0).length;
+            const avgPrice = total ? Math.round(products.reduce((sum, p) => sum + p.price, 0) / total) : 0;
+
+            document.getElementById('summary-total-count').textContent = total;
+            document.getElementById('summary-sale-count').textContent = onSale;
+            document.getElementById('summary-average-price').textContent = Formatters.price(avgPrice);
+        }
+
+        function renderResultsInfo(filtered, total) {
+            if (searchQuery) {
+                resultsInfo.innerHTML = `Найдено <strong>${filtered.length}</strong> из <strong>${total}</strong> по запросу «${searchQuery}»`;
+            } else if (currentFilter === 'sale') {
+                resultsInfo.innerHTML = `Показано <strong>${filtered.length}</strong> товаров со скидкой`;
+            } else if (currentFilter === 'in-stock') {
+                resultsInfo.innerHTML = `Показано <strong>${filtered.length}</strong> товаров в наличии`;
+            } else {
+                resultsInfo.innerHTML = `Всего сохранено <strong>${filtered.length}</strong> ${Helpers.pluralize(filtered.length, ['товар', 'товара', 'товаров'])}`;
+            }
+        }
+
+        function renderRecommendations() {
+            const recommendations = ProductsDB.getFeatured(4);
+            recommendationsGrid.innerHTML = recommendations.map(product => {
+                const inCart = Cart.hasItem(product.id);
+                return `
+                <div class="product-card">
+                    <div class="product-card__image-wrapper">
+                        <a href="product.html?id=${product.id}">
+                            <img src="${product.images[0]?.url || ''}" alt="${product.name}" class="product-card__image">
+                        </a>
+                    </div>
+                    <div class="product-card__content">
+                        <a href="product.html?id=${product.id}" class="product-card__title">${product.name}</a>
+                        <div class="product-card__price">
+                            <span class="product-card__price-current">${Formatters.price(product.price)}</span>
+                            ${product.originalPrice ? `<span class="product-card__price-original">${Formatters.price(product.originalPrice)}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="product-card__footer">
+                        <div class="product-card__cart-actions">
+                            <button type="button" class="btn btn--primary btn--sm btn--block ${inCart ? 'btn--success' : ''}" data-add-to-cart="${product.id}">${inCart ? 'В корзине' : 'В корзину'}</button>
+                            <button type="button" class="btn btn--outline btn--sm btn--block cart-remove-inline" data-cart-remove="${product.id}" ${inCart ? '' : 'hidden'} aria-hidden="${inCart ? 'false' : 'true'}">Убрать из корзины</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function renderFavorites() {
+            const allProducts = getFavoriteProducts();
+            const filtered = sortProducts(filterProducts(allProducts));
+
+            // Header / counts
+            headerCountEl.textContent = allProducts.length;
+
+            if (allProducts.length === 0) {
+                clearBtn.style.display = 'none';
+                summary.style.display = 'none';
+                toolbar.style.display = 'none';
+                resultsInfo.style.display = 'none';
+                recommendationsSection.style.display = 'block';
+                renderRecommendations();
+
+                content.innerHTML = `
+                    <div class="favorites-empty">
+                        <div class="favorites-empty__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="favorites-empty__title">В избранном пока пусто</h2>
+                        <p class="favorites-empty__text">Добавляйте товары в избранное, чтобы не потерять интересные предложения и быстро вернуться к ним позже.</p>
+                        <div class="favorites-empty__buttons">
+                            <a href="catalog.html" class="btn btn--primary btn--lg">Перейти в каталог</a>
+                            <a href="catalog.html?badges=sale" class="btn btn--outline btn--lg">Смотреть скидки</a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            clearBtn.style.display = 'inline-flex';
+            summary.style.display = 'flex';
+            toolbar.style.display = 'flex';
+            resultsInfo.style.display = 'block';
+            recommendationsSection.style.display = 'block';
+
+            renderSummary(allProducts);
+            renderResultsInfo(filtered, allProducts.length);
+            renderRecommendations();
+
+            if (filtered.length === 0) {
+                content.innerHTML = `
+                    <div class="favorites-empty" style="padding: var(--spacing-12);">
+                        <div class="favorites-empty__icon" style="width: 96px; height: 96px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 44px; height: 44px;">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="M21 21l-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                        <h2 class="favorites-empty__title" style="font-size: var(--font-size-xl);">Ничего не найдено</h2>
+                        <p class="favorites-empty__text">Попробуйте изменить поисковый запрос или сбросить фильтры.</p>
+                        <div class="favorites-empty__buttons">
+                            <button class="btn btn--outline btn--lg" id="reset-favorites-filters">Сбросить фильтры</button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('reset-favorites-filters')?.addEventListener('click', function() {
+                    currentFilter = 'all';
+                    currentSort = 'newest';
+                    searchQuery = '';
+                    document.getElementById('favorites-search-input').value = '';
+                    document.getElementById('favorites-sort-select').value = 'newest';
+                    document.querySelectorAll('.favorites-filter-btn').forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.filter === 'all');
+                    });
+                    renderFavorites();
+                });
+                return;
+            }
+
+            content.innerHTML = `<div class="favorites-grid">${filtered.map(renderProductCard).join('')}</div>`;
+
+            // Move to cart buttons
+            document.querySelectorAll('[data-move-to-cart]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.moveToCart);
+                    Cart.addItem(id, 1);
+                });
+            });
+        }
+
+        // Search
+        document.getElementById('favorites-search-input')?.addEventListener('input', Helpers.debounce(function() {
+            searchQuery = this.value.trim().toLowerCase();
+            renderFavorites();
+        }, 250));
+
+        // Filters
+        document.querySelectorAll('.favorites-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.favorites-filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderFavorites();
+            });
+        });
+
+        // Sort
+        document.getElementById('favorites-sort-select')?.addEventListener('change', function() {
+            currentSort = this.value;
+            renderFavorites();
+        });
+
+        // Clear all
+        clearBtn?.addEventListener('click', function() {
+            if (confirm('Вы уверены, что хотите очистить избранное?')) {
+                Favorites.clear();
+            }
+        });
+
+        // Add all to cart
+        document.getElementById('add-all-to-cart-btn')?.addEventListener('click', function() {
+            const products = getFavoriteProducts().filter(p => p.stockStatus !== 'out_of_stock');
+            let added = 0;
+            products.forEach(p => {
+                if (!Cart.hasItem(p.id)) {
+                    Cart.addItem(p.id, 1);
+                    added++;
+                }
+            });
+            if (added > 0) {
+                Notifications.success(`Добавлено в корзину: ${added} ${Helpers.pluralize(added, ['товар', 'товара', 'товаров'])}`);
+            } else {
+                Notifications.info('Все доступные товары уже находятся в корзине');
+            }
+        });
+
+        // Re-render on favorites/cart updates
+        window.addEventListener('favorites:add', renderFavorites);
+        window.addEventListener('favorites:remove', renderFavorites);
+        window.addEventListener('favorites:clear', renderFavorites);
+        window.addEventListener('cart:add', renderFavorites);
+        window.addEventListener('cart:remove', renderFavorites);
+        window.addEventListener('cart:update', renderFavorites);
+
+        renderFavorites();
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AutoNova — интернет-магазин автоаксессуаров. Коврики, чехлы, видеорегистраторы, LED-лампы, инструменты и аксессуары для вашего автомобиля.">
+    <meta name="keywords" content="автоаксессуары, автотовары, коврики, чехлы, видеорегистраторы, LED лампы, автоэлектроника">
+    <title>AutoNova - Интернет-магазин автоаксессуаров</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23e94560' rx='15' width='100' height='100'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='50' font-weight='bold'>A</text></svg>">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/catalog.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* ===== Enhanced Home Styles ===== */
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: calc(var(--header-height) + var(--spacing-10)) 0 var(--spacing-12);
+            margin-top: calc(var(--header-height) * -1);
+            background:
+                radial-gradient(circle at top right, rgba(233, 69, 96, 0.12), transparent 35%),
+                linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -60px;
+            width: 460px;
+            height: 460px;
+            background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -120px;
+            left: -80px;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: var(--spacing-10);
+            align-items: center;
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-2) var(--spacing-4);
+            background-color: rgba(255,255,255,0.12);
+            color: var(--color-white);
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-4);
+            backdrop-filter: blur(4px);
+        }
+
+        .hero__badge svg {
+            width: 16px;
+            height: 16px;
+            color: var(--color-accent-light);
+        }
+
+        .hero__title {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            font-weight: var(--font-weight-extrabold);
+            line-height: 1.05;
+            color: var(--color-white);
+            margin-bottom: var(--spacing-4);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+
+        .hero__title span {
+            color: var(--color-accent-light);
+        }
+
+        .hero__subtitle {
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-relaxed);
+            color: rgba(255,255,255,0.88);
+            max-width: 640px;
+            margin-bottom: var(--spacing-6);
+        }
+
+        .hero__actions {
+            display: flex;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-8);
+        }
+
+        .hero__actions .btn--primary {
+            background-color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .hero__actions .btn--primary:hover {
+            background-color: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+        }
+
+        .hero__actions .btn--outline {
+            border: 2px solid rgba(255,255,255,0.3);
+            color: var(--color-white);
+            background-color: rgba(255,255,255,0.04);
+        }
+
+        .hero__actions .btn--outline:hover {
+            border-color: var(--color-white);
+            background-color: rgba(255,255,255,0.1);
+            color: var(--color-white);
+        }
+
+        .hero__features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-4);
+            margin-top: var(--spacing-4);
+        }
+
+        .hero__feature {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            padding: var(--spacing-4);
+            background-color: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--border-radius-xl);
+            backdrop-filter: blur(4px);
+        }
+
+        .hero__feature-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255,255,255,0.12);
+            border-radius: var(--border-radius-lg);
+            color: var(--color-accent-light);
+            flex-shrink: 0;
+        }
+
+        .hero__feature-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .hero__feature-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .hero__feature-value {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-white);
+            line-height: 1.2;
+        }
+
+        .hero__feature-label {
+            font-size: var(--font-size-xs);
+            color: rgba(255,255,255,0.72);
+            margin-top: 2px;
+        }
+
+        /* Hero Right */
+        .hero__visual {
+            position: relative;
+        }
+
+        .hero__main-card {
+            position: relative;
+            padding: var(--spacing-5);
+            background-color: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: var(--border-radius-2xl);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+        }
+
+        .hero__main-image {
+            width: 100%;
+            border-radius: var(--border-radius-xl);
+            object-fit: cover;
+            min-height: 420px;
+            max-height: 520px;
+        }
+
+        .hero__floating-card {
+            position: absolute;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-xl);
+            padding: var(--spacing-4);
+            z-index: 2;
+        }
+
+        .hero__floating-card--top {
+            top: -20px;
+            left: -28px;
+            width: 220px;
+        }
+
+        .hero__floating-card--bottom {
+            right: -20px;
+            bottom: -24px;
+            width: 240px;
+        }
+
+        .hero__floating-label {
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+            color: var(--text-tertiary);
+            margin-bottom: var(--spacing-2);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .hero__floating-title {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .hero__floating-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-3);
+        }
+
+        .hero__floating-price {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-accent);
+        }
+
+        .hero__floating-rating {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+        }
+
+        .hero__floating-rating svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--color-rating);
+        }
+
+        /* Promo Bar */
+        .home-promo-bar {
+            margin-top: calc(-1 * var(--spacing-6));
+            position: relative;
+            z-index: 3;
+        }
+
+        .home-promo-bar__inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-4);
+            padding: var(--spacing-4);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-2xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .home-promo-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            padding: var(--spacing-3);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .home-promo-item__icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            color: var(--color-primary);
+            border-radius: var(--border-radius-xl);
+            flex-shrink: 0;
+        }
+
+        .home-promo-item__icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .home-promo-item__title {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .home-promo-item__text {
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+        }
+
+        /* Categories */
+        .categories-section {
+            padding-top: var(--spacing-16);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-4);
+        }
+
+        .category-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-6);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-all);
+            overflow: hidden;
+            min-height: 180px;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(26,26,46,0) 0%, rgba(26,26,46,0.02) 100%);
+            pointer-events: none;
+        }
+
+        .category-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .category-card__top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-5);
+        }
+
+        .category-card__icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-xl);
+            color: var(--color-primary);
+            transition: var(--transition-colors);
+        }
+
+        .category-card:hover .category-card__icon {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .category-card__icon svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .category-card__count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            height: 24px;
+            padding: 0 var(--spacing-2);
+            font-size: 11px;
+            font-weight: var(--font-weight-bold);
+            color: var(--text-secondary);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-full);
+        }
+
+        .category-card__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .category-card__description {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: auto;
+        }
+
+        .category-card__link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            margin-top: var(--spacing-4);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-link);
+        }
+
+        .category-card__link svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        .category-card:hover .category-card__link svg {
+            transform: translateX(4px);
+        }
+
+        /* Product Section */
+        .products-section {
+            margin-bottom: var(--spacing-2);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .section-header__left {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-1);
+        }
+
+        .section-kicker {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+        }
+
+        .section-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .section-description {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            margin: var(--spacing-10) 0;
+        }
+
+        .promo-banner__content {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: var(--spacing-8);
+            align-items: center;
+            padding: var(--spacing-10);
+            background: linear-gradient(135deg, var(--color-accent) 0%, #ff6b6b 100%);
+            border-radius: var(--border-radius-2xl);
+            overflow: hidden;
+        }
+
+        .promo-banner__content::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -5%;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .promo-banner__text {
+            position: relative;
+            z-index: 1;
+            color: var(--color-white);
+        }
+
+        .promo-banner__badge {
+            display: inline-block;
+            padding: var(--spacing-1) var(--spacing-3);
+            background-color: rgba(255,255,255,0.18);
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-widest);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .promo-banner__title {
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-3);
+            line-height: var(--line-height-tight);
+        }
+
+        .promo-banner__description {
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-relaxed);
+            opacity: 0.92;
+            margin-bottom: var(--spacing-5);
+            max-width: 520px;
+        }
+
+        .promo-banner__actions {
+            display: flex;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+        }
+
+        .promo-banner__actions .btn {
+            background-color: var(--color-white);
+            color: var(--color-accent);
+            border-color: var(--color-white);
+        }
+
+        .promo-banner__actions .btn:hover {
+            background-color: var(--color-gray-100);
+        }
+
+        .promo-banner__actions .btn--outline-white {
+            background-color: transparent;
+            color: var(--color-white);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .promo-banner__actions .btn--outline-white:hover {
+            background-color: rgba(255,255,255,0.12);
+            border-color: var(--color-white);
+        }
+
+        .promo-banner__image {
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-banner__image img {
+            width: 100%;
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-xl);
+            min-height: 280px;
+            object-fit: cover;
+        }
+
+        /* Features */
+        .features-section {
+            padding: var(--spacing-14) 0;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-5);
+        }
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: var(--spacing-6);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-all);
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-card__icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            color: var(--color-primary);
+            border-radius: var(--border-radius-xl);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .feature-card__icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .feature-card__title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .feature-card__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* Reviews / trust */
+        .home-reviews {
+            margin: var(--spacing-14) 0;
+        }
+
+        .home-reviews__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-5);
+        }
+
+        .home-review-card {
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-6);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            transition: var(--transition-all);
+        }
+
+        .home-review-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .home-review-card__stars {
+            display: flex;
+            gap: 2px;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .home-review-card__stars svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--color-rating);
+        }
+
+        .home-review-card__text {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--spacing-5);
+            flex: 1;
+        }
+
+        .home-review-card__author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            padding-top: var(--spacing-4);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .home-review-card__avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            color: var(--color-white);
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            flex-shrink: 0;
+        }
+
+        .home-review-card__name {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .home-review-card__meta {
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+        }
+
+        /* CTA */
+        .home-cta {
+            position: relative;
+            margin-top: var(--spacing-14);
+            padding: var(--spacing-10);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: var(--border-radius-2xl);
+            color: var(--color-white);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .home-cta::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: var(--border-radius-full);
+        }
+
+        .home-cta__content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .home-cta__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .home-cta__text {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            margin-bottom: var(--spacing-6);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .home-cta__buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+        }
+
+        .home-cta__buttons .btn--white {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+            border-color: var(--color-white);
+        }
+
+        .home-cta__buttons .btn--white:hover {
+            background-color: var(--color-gray-100);
+        }
+
+        .home-cta__buttons .btn--outline-white {
+            background: transparent;
+            color: var(--color-white);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .home-cta__buttons .btn--outline-white:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-color: var(--color-white);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .categories-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .home-reviews__grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero__content,
+            .promo-banner__content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero__visual {
+                max-width: 560px;
+                margin: 0 auto;
+            }
+
+            .hero__features {
+                grid-template-columns: 1fr;
+            }
+
+            .home-promo-bar__inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .home-reviews__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: calc(var(--header-height) + var(--spacing-8)) 0 var(--spacing-10);
+            }
+
+            .hero__title {
+                font-size: clamp(2rem, 9vw, 2.8rem);
+            }
+
+            .hero__subtitle {
+                font-size: var(--font-size-base);
+            }
+
+            .hero__actions,
+            .promo-banner__actions,
+            .home-cta__buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero__actions .btn,
+            .promo-banner__actions .btn,
+            .home-cta__buttons .btn {
+                width: 100%;
+            }
+
+            .hero__floating-card {
+                display: none;
+            }
+
+            .categories-grid,
+            .products-grid,
+            .features-grid,
+            .home-reviews__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .promo-banner__content {
+                padding: var(--spacing-6);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .home-promo-bar__inner {
+                grid-template-columns: 1fr;
+            }
+
+            .categories-grid,
+            .products-grid,
+            .features-grid,
+            .home-reviews__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero__badge,
+            .section-kicker {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ===== Header ===== -->
+        <header class="header">
+            <div class="header__top-bar">
+                <div class="container">
+                    <div class="header__top-links">
+                        <a href="about.html" class="header__top-link">О компании</a>
+                        <a href="delivery.html" class="header__top-link">Доставка</a>
+                        <a href="contacts.html" class="header__top-link">Контакты</a>
+                    </div>
+                    <div class="header__promo">
+                        <span class="header__promo-text">🚗 Бесплатная доставка от 5000 ₽</span>
+                    </div>
+                    <div class="header__top-links">
+                        <a href="tel:+78001234567" class="header__top-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            8 (800) 123-45-67
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header__main">
+                <div class="container">
+                    <button class="header__mobile-toggle" aria-label="Меню">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+
+                    <a href="index.html" class="header__logo">
+                        <div class="header__logo-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M16 8l-8 8"></path>
+                                <path d="M8 8l8 8"></path>
+                            </svg>
+                        </div>
+                        <span class="header__logo-text">Auto<span>Nova</span></span>
+                    </a>
+
+                    <div class="header__search">
+                        <form class="search-form" action="catalog.html" method="GET">
+                            <div class="search-form__input-wrapper">
+                                <input type="search" name="search" class="search-form__input" placeholder="Поиск товаров..." autocomplete="off">
+                                <div class="search-form__suggestions"></div>
+                            </div>
+                            <button type="submit" class="search-form__button" aria-label="Искать">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="M21 21l-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="header__actions">
+                        <!-- Только Избранное и Корзина -->
+                        <a href="favorites.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span class="header__action-badge" data-favorites-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                        <a href="cart.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <span class="header__action-badge" data-cart-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="header__nav">
+                <div class="container">
+                    <div class="nav-categories">
+                        <button class="nav-categories__toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                            Каталог товаров
+                        </button>
+                        <div class="nav-categories__menu">
+                            <ul class="nav-categories__list" id="nav-categories-list"></ul>
+                        </div>
+                    </div>
+                    <nav class="nav-main">
+                        <a href="catalog.html" class="nav-main__link">Все товары</a>
+                        <a href="catalog.html?badges=sale" class="nav-main__link nav-main__link--highlight">Распродажа</a>
+                        <a href="catalog.html?badges=new" class="nav-main__link">Новинки</a>
+                        <a href="catalog.html?badges=bestseller" class="nav-main__link">Хиты продаж</a>
+                    </nav>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ===== Mobile Menu ===== -->
+        <div class="mobile-menu">
+            <div class="mobile-menu__header">
+                <span class="header__logo-text">Auto<span>Nova</span></span>
+                <button class="mobile-menu__close" aria-label="Закрыть">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <nav class="mobile-menu__nav">
+                <div class="mobile-menu__section">
+                    <a href="catalog.html" class="mobile-menu__link">Каталог</a>
+                    <a href="favorites.html" class="mobile-menu__link">Избранное</a>
+                    <a href="cart.html" class="mobile-menu__link">Корзина</a>
+                </div>
+                <div class="mobile-menu__section">
+                    <a href="delivery.html" class="mobile-menu__link">Доставка и оплата</a>
+                    <a href="contacts.html" class="mobile-menu__link">Контакты</a>
+                    <a href="about.html" class="mobile-menu__link">О компании</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- ===== Main Content ===== -->
+        <main class="main-content">
+            <!-- Hero -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero__content">
+                        <div class="hero__text">
+                            <div class="hero__badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Более 10 000 автоаксессуаров в наличии
+                            </div>
+                            <h1 class="hero__title">Всё для вашего <span>автомобиля</span></h1>
+                            <p class="hero__subtitle">Коврики, чехлы, электроника, освещение, инструменты и аксессуары. Быстрая доставка по всей России и профессиональная поддержка.</p>
+                            <div class="hero__actions">
+                                <a href="catalog.html" class="btn btn--primary btn--lg">Перейти в каталог</a>
+                                <a href="catalog.html?badges=sale" class="btn btn--outline btn--lg">Смотреть скидки</a>
+                            </div>
+                            <div class="hero__features">
+                                <div class="hero__feature">
+                                    <div class="hero__feature-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="1" y="3" width="15" height="13"></rect>
+                                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="hero__feature-text">
+                                        <span class="hero__feature-value">Бесплатно</span>
+                                        <span class="hero__feature-label">от 5 000 ₽</span>
+                                    </div>
+                                </div>
+                                <div class="hero__feature">
+                                    <div class="hero__feature-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="hero__feature-text">
+                                        <span class="hero__feature-value">100%</span>
+                                        <span class="hero__feature-label">гарантия качества</span>
+                                    </div>
+                                </div>
+                                <div class="hero__feature">
+                                    <div class="hero__feature-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="hero__feature-text">
+                                        <span class="hero__feature-value">1-3 дня</span>
+                                        <span class="hero__feature-label">по Москве</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hero__visual">
+                            <div class="hero__main-card">
+                                <img class="hero__main-image" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900" alt="Автомобиль AutoNova">
+                            </div>
+
+                            <div class="hero__floating-card hero__floating-card--top">
+                                <div class="hero__floating-label">Хит продаж</div>
+                                <div class="hero__floating-title">Видеорегистратор 4K Ultra HD</div>
+                                <div class="hero__floating-meta">
+                                    <span class="hero__floating-price">7 990 ₽</span>
+                                    <span class="hero__floating-rating">
+                                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>
+                                        4.9
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="hero__floating-card hero__floating-card--bottom">
+                                <div class="hero__floating-label">Доставка</div>
+                                <div class="hero__floating-title">Более 5 000 пунктов выдачи</div>
+                                <div class="hero__floating-meta">
+                                    <span class="hero__floating-price" style="color: var(--color-success);">Бесплатно</span>
+                                    <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">По всей России</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Promo Bar -->
+            <section class="home-promo-bar">
+                <div class="container">
+                    <div class="home-promo-bar__inner">
+                        <div class="home-promo-item">
+                            <div class="home-promo-item__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"></rect>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="home-promo-item__title">Быстрая доставка</div>
+                                <div class="home-promo-item__text">По Москве 1-3 дня</div>
+                            </div>
+                        </div>
+                        <div class="home-promo-item">
+                            <div class="home-promo-item__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="23 4 23 10 17 10"></polyline>
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="home-promo-item__title">Возврат 14 дней</div>
+                                <div class="home-promo-item__text">Без лишних вопросов</div>
+                            </div>
+                        </div>
+                        <div class="home-promo-item">
+                            <div class="home-promo-item__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="home-promo-item__title">Поддержка 24/7</div>
+                                <div class="home-promo-item__text">Всегда на связи</div>
+                            </div>
+                        </div>
+                        <div class="home-promo-item">
+                            <div class="home-promo-item__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="home-promo-item__title">Гарантия качества</div>
+                                <div class="home-promo-item__text">Официальные поставки</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="section categories-section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-header__left">
+                            <span class="section-kicker">Категории</span>
+                            <h2 class="section-title">Подберите то, что нужно</h2>
+                            <p class="section-description">Популярные категории для комфортного и безопасного автомобиля</p>
+                        </div>
+                        <a href="catalog.html" class="section-link">Все категории →</a>
+                    </div>
+
+                    <div class="categories-grid" id="categories-grid">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="section products-section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-header__left">
+                            <span class="section-kicker">Популярное</span>
+                            <h2 class="section-title">Хиты продаж</h2>
+                            <p class="section-description">Товары, которые чаще всего выбирают наши клиенты</p>
+                        </div>
+                        <a href="catalog.html?sort=popularity" class="section-link">Смотреть все →</a>
+                    </div>
+                    <div class="products-grid" id="featured-products-grid"></div>
+                </div>
+            </section>
+
+            <!-- Promo Banner -->
+            <section class="promo-banner">
+                <div class="container">
+                    <div class="promo-banner__content">
+                        <div class="promo-banner__text">
+                            <span class="promo-banner__badge">Сезонная распродажа</span>
+                            <h2 class="promo-banner__title">Скидки до 30% на автоаксессуары</h2>
+                            <p class="promo-banner__description">Успейте купить коврики, чехлы, электронику и аксессуары по специальным ценам. Предложение ограничено.</p>
+                            <div class="promo-banner__actions">
+                                <a href="catalog.html?badges=sale" class="btn btn--lg">Смотреть скидки</a>
+                                <a href="catalog.html" class="btn btn--lg btn--outline-white">Весь каталог</a>
+                            </div>
+                        </div>
+                        <div class="promo-banner__image">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900" alt="Сезонная распродажа AutoNova">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Products -->
+            <section class="section products-section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-header__left">
+                            <span class="section-kicker">Новинки</span>
+                            <h2 class="section-title">Новое поступление</h2>
+                            <p class="section-description">Свежие модели и актуальные аксессуары этого сезона</p>
+                        </div>
+                        <a href="catalog.html?badges=new" class="section-link">Все новинки →</a>
+                    </div>
+                    <div class="products-grid" id="new-products-grid"></div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="features-section">
+                <div class="container">
+                    <div class="section-header" style="margin-bottom: var(--spacing-8);">
+                        <div class="section-header__left">
+                            <span class="section-kicker">Преимущества</span>
+                            <h2 class="section-title">Почему выбирают AutoNova</h2>
+                            <p class="section-description">Сервис, которому доверяют тысячи автовладельцев по всей России</p>
+                        </div>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-card__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"></rect>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                </svg>
+                            </div>
+                            <h3 class="feature-card__title">Быстрая доставка</h3>
+                            <p class="feature-card__text">Доставляем по всей России. Экспресс-доставка по Москве и бесплатная доставка от 5 000 ₽.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <polyline points="9 12 11 14 15 10"></polyline>
+                                </svg>
+                            </div>
+                            <h3 class="feature-card__title">Проверенное качество</h3>
+                            <p class="feature-card__text">Работаем только с надёжными производителями. Официальная гарантия на всю продукцию.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="23 4 23 10 17 10"></polyline>
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                                </svg>
+                            </div>
+                            <h3 class="feature-card__title">Простой возврат</h3>
+                            <p class="feature-card__text">Не подошёл товар? Вернём деньги или обменяем в течение 14 дней без лишних сложностей.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="feature-card__title">Экспертная поддержка</h3>
+                            <p class="feature-card__text">Поможем подобрать аксессуары под марку и модель автомобиля. Быстро отвечаем в чате и по телефону.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sale Products -->
+            <section class="section products-section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-header__left">
+                            <span class="section-kicker">Выгодно</span>
+                            <h2 class="section-title">Товары со скидкой</h2>
+                            <p class="section-description">Лучшие предложения недели по специальным ценам</p>
+                        </div>
+                        <a href="catalog.html?badges=sale" class="section-link">Все скидки →</a>
+                    </div>
+                    <div class="products-grid" id="sale-products-grid"></div>
+                </div>
+            </section>
+
+            <!-- Reviews -->
+            <section class="home-reviews">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-header__left">
+                            <span class="section-kicker">Доверие клиентов</span>
+                            <h2 class="section-title">Отзывы покупателей</h2>
+                            <p class="section-description">Нам доверяют тысячи автовладельцев по всей России</p>
+                        </div>
+                    </div>
+
+                    <div class="home-reviews__grid">
+                        <div class="home-review-card">
+                            <div class="home-review-card__stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <p class="home-review-card__text">Отличный магазин! Быстро подобрали коврики на Camry, доставили за два дня. Качество реально на высоте, всё подошло идеально.</p>
+                            <div class="home-review-card__author">
+                                <div class="home-review-card__avatar">АК</div>
+                                <div>
+                                    <div class="home-review-card__name">Александр К.</div>
+                                    <div class="home-review-card__meta">Toyota Camry • Москва</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="home-review-card">
+                            <div class="home-review-card__stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <p class="home-review-card__text">Покупал видеорегистратор и LED-лампы. Всё оригинальное, с гарантией. Поддержка быстро ответила на вопросы по установке.</p>
+                            <div class="home-review-card__author">
+                                <div class="home-review-card__avatar">ИМ</div>
+                                <div>
+                                    <div class="home-review-card__name">Игорь М.</div>
+                                    <div class="home-review-card__meta">BMW X5 • Санкт-Петербург</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="home-review-card">
+                            <div class="home-review-card__stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <p class="home-review-card__text">Заказывала чехлы и органайзер в багажник. Всё пришло аккуратно упакованным, доставка быстрая. Очень удобный сайт и приятный сервис.</p>
+                            <div class="home-review-card__author">
+                                <div class="home-review-card__avatar">МС</div>
+                                <div>
+                                    <div class="home-review-card__name">Мария С.</div>
+                                    <div class="home-review-card__meta">Hyundai Tucson • Казань</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="home-cta">
+                <div class="container">
+                    <div class="home-cta__content">
+                        <h2 class="home-cta__title">Подберите аксессуары для вашего авто уже сегодня</h2>
+                        <p class="home-cta__text">Большой выбор товаров, честные цены, быстрая доставка и профессиональная поддержка — всё в одном магазине.</p>
+                        <div class="home-cta__buttons">
+                            <a href="catalog.html" class="btn btn--lg btn--white">Перейти в каталог</a>
+                            <a href="contacts.html" class="btn btn--lg btn--outline-white">Получить консультацию</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ===== Footer ===== -->
+        <footer class="footer">
+            <div class="footer__main">
+                <div class="container">
+                    <div class="footer__grid">
+                        <div class="footer__column footer__column--about">
+                            <a href="index.html" class="footer__logo">
+                                <span class="footer__logo-text">Auto<span>Nova</span></span>
+                            </a>
+                            <p class="footer__about-text">
+                                Интернет-магазин автоаксессуаров с 2015 года. Более 10 000 товаров для вашего автомобиля.
+                            </p>
+                            <div class="footer__social">
+                                <a href="#" class="footer__social-link" aria-label="VK">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1.001-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.57 4 8.145c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.27-1.422 2.18-3.61 2.18-3.61.119-.254.322-.491.762-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/></svg>
+                                </a>
+                                <a href="#" class="footer__social-link" aria-label="Telegram">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                                </a>
+                                <a href="#" class="footer__social-link" aria-label="YouTube">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Каталог</h4>
+                            <ul class="footer__links">
+                                <li><a href="catalog.html?category=kovriki">Коврики</a></li>
+                                <li><a href="catalog.html?category=chehly-i-nakidki">Чехлы и накидки</a></li>
+                                <li><a href="catalog.html?category=elektronika">Электроника</a></li>
+                                <li><a href="catalog.html?category=osveschenie">Освещение</a></li>
+                                <li><a href="catalog.html?category=uhod-za-avto">Уход за авто</a></li>
+                                <li><a href="catalog.html?category=aksessuary">Аксессуары</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Покупателям</h4>
+                            <ul class="footer__links">
+                                <li><a href="delivery.html">Доставка и оплата</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Контакты</h4>
+                            <ul class="footer__contacts">
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <a href="tel:+78001234567">8 (800) 123-45-67</a>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <a href="mailto:info@autonova.ru">info@autonova.ru</a>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    <span>Москва, ул. Примерная, д. 1</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                    <span>Пн-Пт: 9:00 - 20:00</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="container">
+                    <div class="footer__bottom-content">
+                        <p class="footer__copyright">© 2024 AutoNova. Все права защищены.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== Scripts ===== -->
+    <!-- Данные -->
+    <script src="js/data/brands.js"></script>
+    <script src="js/data/products.js"></script>
+    <script src="js/data/categories.js"></script>
+    <script src="js/data/reviews.js"></script>
+
+    <!-- Утилиты -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/formatters.js"></script>
+
+    <!-- Ядро -->
+    <script src="js/core/storage.js"></script>
+    <script src="js/core/app.js"></script>
+
+    <!-- Модули -->
+    <script src="js/modules/notifications.js"></script>
+    <script src="js/modules/cart.js"></script>
+    <script src="js/modules/favorites.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ===== Render nav categories =====
+        const categories = CategoriesDB.getAll();
+        const navCategoriesList = document.getElementById('nav-categories-list');
+        if (navCategoriesList) {
+            navCategoriesList.innerHTML = categories.map(cat => `
+                <li class="nav-categories__item">
+                    <a href="catalog.html?category=${cat.slug}" class="nav-categories__link">
+                        <span>${cat.name}</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                </li>
+            `).join('');
+        }
+
+        // ===== Categories grid =====
+        const categoriesGrid = document.getElementById('categories-grid');
+        if (categoriesGrid) {
+            categoriesGrid.innerHTML = categories.map(cat => `
+                <a href="catalog.html?category=${cat.slug}" class="category-card">
+                    <div class="category-card__top">
+                        <div class="category-card__icon">${cat.icon || ''}</div>
+                        <span class="category-card__count">${cat.productsCount}</span>
+                    </div>
+                    <h3 class="category-card__title">${cat.name}</h3>
+                    <p class="category-card__description">${cat.description}</p>
+                    <span class="category-card__link">
+                        Смотреть товары
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </span>
+                </a>
+            `).join('');
+        }
+
+        // ===== Render products =====
+        function renderHomeProducts(containerId, products) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = products.map(product => {
+                const isFavorite = Storage.isFavorite(product.id);
+                const inCart = Cart.hasItem(product.id);
+
+                let badges = '';
+                if (product.badges?.length) {
+                    badges = `
+                        <div class="product-card__badges">
+                            ${product.badges.map(badge => {
+                                if (badge === 'sale') return `<span class="product-card__badge product-card__badge--sale">-${product.discount}%</span>`;
+                                if (badge === 'new') return `<span class="product-card__badge product-card__badge--new">Новинка</span>`;
+                                if (badge === 'bestseller') return `<span class="product-card__badge product-card__badge--bestseller">Хит</span>`;
+                                return '';
+                            }).join('')}
+                        </div>
+                    `;
+                }
+
+                const ratingStars = Formatters.ratingStars(product.rating);
+
+                return `
+                    <div class="product-card">
+                        <div class="product-card__image-wrapper">
+                            <a href="product.html?id=${product.id}">
+                                <img src="${product.images[0]?.url || ''}" alt="${product.name}" class="product-card__image" loading="lazy">
+                            </a>
+                            ${badges}
+                            <div class="product-card__actions">
+                                <button class="product-card__action ${isFavorite ? 'active' : ''}" data-toggle-favorite="${product.id}" title="В избранное">
+                                    <svg viewBox="0 0 24 24" fill="${isFavorite ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-card__content">
+                            <a href="product.html?id=${product.id}" class="product-card__title">${product.name}</a>
+                            <div class="product-card__rating">
+                                <div class="product-card__stars">${ratingStars}</div>
+                                <span class="product-card__reviews">${product.reviewsCount}</span>
+                            </div>
+                            <div class="product-card__price">
+                                <span class="product-card__price-current">${Formatters.price(product.price)}</span>
+                                ${product.originalPrice ? `<span class="product-card__price-original">${Formatters.price(product.originalPrice)}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="product-card__footer">
+                            <div class="product-card__cart-actions">
+                                <button type="button" class="btn btn--primary btn--sm btn--block ${inCart ? 'btn--success' : ''}" data-add-to-cart="${product.id}">
+                                    ${inCart ? 'В корзине' : 'В корзину'}
+                                </button>
+                                <button type="button" class="btn btn--outline btn--sm btn--block cart-remove-inline" data-cart-remove="${product.id}" ${inCart ? '' : 'hidden'} aria-hidden="${inCart ? 'false' : 'true'}">Убрать из корзины</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        renderHomeProducts('featured-products-grid', ProductsDB.getBestsellers(4));
+        renderHomeProducts('new-products-grid', ProductsDB.getNew(4));
+        renderHomeProducts('sale-products-grid', ProductsDB.getOnSale(4));
+
+        // ===== Intersection observer animation =====
+        const animatedElements = document.querySelectorAll(
+            '.category-card, .feature-card, .brand-showcase-card, .home-review-card, .product-card'
+        );
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        animatedElements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `opacity 0.45s ease ${index * 40}ms, transform 0.45s ease ${index * 40}ms`;
+            observer.observe(el);
+        });
+    });
+    </script>
+</body>
+</html>

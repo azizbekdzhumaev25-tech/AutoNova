@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Страница товара AutoNova. Подробное описание, характеристики, отзывы и доставка.">
+    <title>Товар - AutoNova</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23e94560' rx='15' width='100' height='100'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='50' font-weight='bold'>A</text></svg>">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/catalog.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* ===== Enhanced Product Page ===== */
+
+        .product-page {
+            padding: var(--spacing-6) 0 var(--spacing-16);
+        }
+
+        /* Top meta strip */
+        .product-meta-strip {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-4);
+            padding: var(--spacing-3) var(--spacing-4);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .product-meta-strip__item {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .product-meta-strip__item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--text-tertiary);
+        }
+
+        .product-meta-strip__item strong {
+            color: var(--text-primary);
+        }
+
+        /* Main layout */
+        .product-main {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: var(--spacing-8);
+            margin-bottom: var(--spacing-12);
+        }
+
+        /* Gallery enhanced */
+        .product-gallery {
+            position: sticky;
+            top: calc(var(--header-height) + var(--spacing-4));
+            align-self: start;
+        }
+
+        .product-gallery__wrapper {
+            display: grid;
+            grid-template-columns: 88px 1fr;
+            gap: var(--spacing-4);
+        }
+
+        .product-gallery__thumbs-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+        }
+
+        .product-gallery__main-box {
+            position: relative;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-2xl);
+            overflow: hidden;
+        }
+
+        .product-gallery__main {
+            position: relative;
+            aspect-ratio: 1;
+            background-color: var(--bg-secondary);
+            overflow: hidden;
+        }
+
+        .product-gallery__main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: var(--spacing-6);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .product-gallery__main:hover .product-gallery__main-image {
+            transform: scale(1.04);
+        }
+
+        .product-gallery__thumb {
+            width: 88px;
+            height: 88px;
+            padding: 4px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            cursor: pointer;
+            transition: var(--transition-all);
+            overflow: hidden;
+        }
+
+        .product-gallery__thumb:hover {
+            border-color: var(--border-medium);
+        }
+
+        .product-gallery__thumb.active {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(26, 26, 46, 0.08);
+        }
+
+        .product-gallery__thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-md);
+        }
+
+        .product-gallery__badges {
+            position: absolute;
+            top: var(--spacing-4);
+            left: var(--spacing-4);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+            z-index: 2;
+        }
+
+        .product-gallery__badge {
+            padding: var(--spacing-1) var(--spacing-3);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+            border-radius: var(--border-radius-full);
+            color: var(--color-white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-gallery__badge--sale { background-color: var(--color-accent); }
+        .product-gallery__badge--new { background-color: var(--color-success); }
+        .product-gallery__badge--bestseller { background-color: var(--color-warning-dark); }
+
+        .product-gallery__actions {
+            position: absolute;
+            top: var(--spacing-4);
+            right: var(--spacing-4);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+            z-index: 2;
+        }
+
+        .product-gallery__action {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255,255,255,0.92);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-full);
+            box-shadow: var(--shadow-sm);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-all);
+            backdrop-filter: blur(6px);
+        }
+
+        .product-gallery__action:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        .product-gallery__action.active {
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+
+        .product-gallery__action svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .product-gallery__footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            padding: var(--spacing-4) var(--spacing-5);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .product-gallery__footer-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .product-gallery__footer-item svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-tertiary);
+        }
+
+        /* Info enhanced */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-info__brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            width: fit-content;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-link);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .product-info__brand-link:hover {
+            text-decoration: underline;
+        }
+
+        .product-info__title {
+            font-size: clamp(1.75rem, 3vw, 2.4rem);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            line-height: var(--line-height-tight);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .product-info__subtitle {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .product-info__top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-4);
+            padding-bottom: var(--spacing-4);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .product-info__sku {
+            font-size: var(--font-size-sm);
+            color: var(--text-tertiary);
+        }
+
+        .product-info__sku strong {
+            color: var(--text-primary);
+        }
+
+        .product-info__meta-links {
+            display: flex;
+            gap: var(--spacing-4);
+            flex-wrap: wrap;
+        }
+
+        .product-info__meta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            font-size: var(--font-size-sm);
+            color: var(--text-link);
+        }
+
+        .product-info__meta-link:hover {
+            text-decoration: underline;
+        }
+
+        .product-info__meta-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Rating block */
+        .product-rating-box {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-5);
+        }
+
+        .product-rating-box__score {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .product-rating-box__stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .product-rating-box__stars svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--color-rating);
+        }
+
+        .product-rating-box__reviews {
+            font-size: var(--font-size-sm);
+            color: var(--text-link);
+        }
+
+        .product-rating-box__reviews:hover {
+            text-decoration: underline;
+        }
+
+        .product-rating-box__sold {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        /* Price block */
+        .product-price-box {
+            padding: var(--spacing-5);
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            margin-bottom: var(--spacing-5);
+        }
+
+        .product-price-box__row {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .product-price-box__current {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-extrabold);
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .product-price-box__original {
+            font-size: var(--font-size-lg);
+            color: var(--text-tertiary);
+            text-decoration: line-through;
+        }
+
+        .product-price-box__discount {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--spacing-1) var(--spacing-3);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            border-radius: var(--border-radius-full);
+        }
+
+        .product-price-box__savings {
+            font-size: var(--font-size-sm);
+            color: var(--color-success-dark);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .product-price-box__credit {
+            margin-top: var(--spacing-3);
+            padding-top: var(--spacing-3);
+            border-top: 1px solid var(--border-light);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .product-price-box__credit strong {
+            color: var(--text-primary);
+        }
+
+        /* Stock */
+        .product-stock-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            padding: var(--spacing-4) var(--spacing-5);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            margin-bottom: var(--spacing-5);
+        }
+
+        .product-stock-box__left {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+        }
+
+        .product-stock-box__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: var(--border-radius-full);
+            flex-shrink: 0;
+        }
+
+        .product-stock-box--in-stock .product-stock-box__dot {
+            background-color: var(--color-success);
+        }
+
+        .product-stock-box--low-stock .product-stock-box__dot {
+            background-color: var(--color-warning);
+        }
+
+        .product-stock-box--out-of-stock .product-stock-box__dot {
+            background-color: var(--color-error);
+        }
+
+        .product-stock-box__status {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .product-stock-box__hint {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .product-stock-box__delivery {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        .product-stock-box__delivery strong {
+            color: var(--text-primary);
+        }
+
+        /* Features */
+        .product-features-box {
+            margin-bottom: var(--spacing-5);
+        }
+
+        .product-features-box__title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .product-features-box__list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3);
+        }
+
+        .product-features-box__item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-2);
+            padding: var(--spacing-3);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .product-features-box__item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--color-success);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Purchase box */
+        .purchase-box {
+            padding: var(--spacing-6);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-2xl);
+            background-color: var(--bg-primary);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-5);
+        }
+
+        .purchase-box__row {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .purchase-box__quantity-label {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+            min-width: 80px;
+        }
+
+        .purchase-box__buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-3);
+        }
+
+        .purchase-box__main-btn {
+            height: 52px;
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .purchase-box__remove-btn {
+            width: 100%;
+            font-weight: var(--font-weight-medium);
+        }
+
+        .purchase-box__secondary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-3);
+        }
+
+        /* Benefits / service */
+        .service-box {
+            padding: var(--spacing-5);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-xl);
+            border: 1px solid var(--border-light);
+        }
+
+        .service-box__item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .service-box__item:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-box__icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-primary);
+            color: var(--color-primary);
+            border-radius: var(--border-radius-lg);
+            flex-shrink: 0;
+        }
+
+        .service-box__icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .service-box__title {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .service-box__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* Similar bundles */
+        .product-bundle {
+            padding: var(--spacing-6);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-2xl);
+            margin-bottom: var(--spacing-10);
+        }
+
+        .product-bundle__title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-5);
+        }
+
+        .product-bundle__row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto;
+            gap: var(--spacing-4);
+            align-items: center;
+        }
+
+        .product-bundle__item {
+            display: flex;
+            gap: var(--spacing-3);
+            align-items: center;
+            padding: var(--spacing-4);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+        }
+
+        .product-bundle__image {
+            width: 72px;
+            height: 72px;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .product-bundle__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: var(--spacing-1);
+        }
+
+        .product-bundle__name {
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-1);
+            line-height: var(--line-height-snug);
+        }
+
+        .product-bundle__price {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .product-bundle__sign {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-tertiary);
+        }
+
+        .product-bundle__summary {
+            padding: var(--spacing-5);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            text-align: center;
+        }
+
+        .product-bundle__summary-title {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .product-bundle__summary-price {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .product-bundle__summary-savings {
+            font-size: var(--font-size-sm);
+            color: var(--color-success-dark);
+            margin-bottom: var(--spacing-4);
+        }
+
+        /* Tabs improved */
+        .product-tabs {
+            margin-bottom: var(--spacing-12);
+        }
+
+        .product-tabs__nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: var(--spacing-6);
+            overflow-x: auto;
+            scrollbar-width: none;
+            gap: var(--spacing-2);
+        }
+
+        .product-tabs__nav::-webkit-scrollbar { display: none; }
+
+        .product-tabs__tab {
+            padding: var(--spacing-4) var(--spacing-5);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition-colors);
+        }
+
+        .product-tabs__tab:hover {
+            color: var(--text-primary);
+        }
+
+        .product-tabs__tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .product-tabs__panel {
+            display: none;
+        }
+
+        .product-tabs__panel.active {
+            display: block;
+        }
+
+        /* Description */
+        .product-description__text p {
+            margin-bottom: var(--spacing-4);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* Specs */
+        .specifications-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-4);
+        }
+
+        .spec-card {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            padding: var(--spacing-4);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            background-color: var(--bg-primary);
+        }
+
+        .spec-card__label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .spec-card__value {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+            text-align: right;
+        }
+
+        /* Reviews block */
+        .reviews-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: var(--spacing-8);
+        }
+
+        .reviews-summary-card {
+            position: sticky;
+            top: calc(var(--header-height) + var(--spacing-4));
+            align-self: start;
+            padding: var(--spacing-6);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-2xl);
+        }
+
+        .reviews-summary-card__score {
+            text-align: center;
+            margin-bottom: var(--spacing-6);
+        }
+
+        .reviews-summary-card__value {
+            font-size: 3rem;
+            font-weight: var(--font-weight-extrabold);
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .reviews-summary-card__stars {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            margin: var(--spacing-2) 0;
+        }
+
+        .reviews-summary-card__stars svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-rating);
+        }
+
+        .reviews-summary-card__count {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .reviews-bars {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .reviews-bars__row {
+            display: grid;
+            grid-template-columns: 34px 1fr 38px;
+            gap: var(--spacing-2);
+            align-items: center;
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .reviews-bars__bar {
+            height: 8px;
+            background-color: var(--color-gray-200);
+            border-radius: var(--border-radius-full);
+            overflow: hidden;
+        }
+
+        .reviews-bars__fill {
+            height: 100%;
+            background-color: var(--color-rating);
+            border-radius: var(--border-radius-full);
+        }
+
+        .reviews-list__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-5);
+            flex-wrap: wrap;
+        }
+
+        .reviews-list__title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .reviews-list__items {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-4);
+        }
+
+        .review-card {
+            padding: var(--spacing-5);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            background-color: var(--bg-primary);
+        }
+
+        .review-card__header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .review-card__author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+        }
+
+        .review-card__avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            color: var(--color-white);
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .review-card__author-name {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .review-card__author-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            flex-wrap: wrap;
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+
+        .review-card__verified {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            color: var(--color-success-dark);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .review-card__verified svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .review-card__rating {
+            display: flex;
+            gap: 2px;
+        }
+
+        .review-card__rating svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--color-rating);
+        }
+
+        .review-card__rating svg.empty {
+            fill: var(--color-rating-empty);
+        }
+
+        .review-card__title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .review-card__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .review-card__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-3);
+            padding-top: var(--spacing-3);
+            border-top: 1px solid var(--border-light);
+            flex-wrap: wrap;
+        }
+
+        .review-card__helpful {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .review-card__helpful-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            padding: var(--spacing-2) var(--spacing-3);
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .review-card__helpful-btn:hover {
+            border-color: var(--border-medium);
+        }
+
+        /* Related */
+        .related-products,
+        .recently-viewed {
+            margin-bottom: var(--spacing-12);
+        }
+
+        .related-products__title,
+        .recently-viewed__title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .related-products__grid,
+        .recently-viewed__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-4);
+        }
+
+        /* Mobile main image thumbs fallback */
+        .product-gallery__thumbnails {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .product-main {
+                grid-template-columns: 1fr;
+            }
+
+            .product-gallery {
+                position: static;
+            }
+
+            .reviews-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-summary-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .product-bundle__row {
+                grid-template-columns: 1fr;
+            }
+
+            .product-bundle__sign {
+                display: none;
+            }
+
+            .related-products__grid,
+            .recently-viewed__grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-gallery__wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .product-gallery__thumbs-vertical {
+                display: none;
+            }
+
+            .product-gallery__thumbnails {
+                display: flex;
+                gap: var(--spacing-2);
+                overflow-x: auto;
+                padding-top: var(--spacing-3);
+                scrollbar-width: none;
+            }
+
+            .product-gallery__thumbnails::-webkit-scrollbar { display: none; }
+
+            .product-info__title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .product-features-box__list,
+            .specifications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .purchase-box__secondary {
+                grid-template-columns: 1fr;
+            }
+
+            .related-products__grid,
+            .recently-viewed__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-meta-strip {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .product-price-box__current {
+                font-size: var(--font-size-2xl);
+            }
+
+            .product-stock-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .product-stock-box__delivery {
+                text-align: left;
+            }
+
+            .service-box__item {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ===== Header ===== -->
+                <header class="header">
+            <div class="header__top-bar">
+                <div class="container">
+                    <div class="header__top-links">
+                        <a href="about.html" class="header__top-link">О компании</a>
+                        <a href="delivery.html" class="header__top-link">Доставка</a>
+                        <a href="contacts.html" class="header__top-link">Контакты</a>
+                    </div>
+                    <div class="header__promo">
+                        <span class="header__promo-text">🚗 Бесплатная доставка от 5000 ₽</span>
+                    </div>
+                    <div class="header__top-links">
+                        <a href="tel:+78001234567" class="header__top-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            8 (800) 123-45-67
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header__main">
+                <div class="container">
+                    <button class="header__mobile-toggle" aria-label="Меню">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+
+                    <a href="index.html" class="header__logo">
+                        <div class="header__logo-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M16 8l-8 8"></path>
+                                <path d="M8 8l8 8"></path>
+                            </svg>
+                        </div>
+                        <span class="header__logo-text">Auto<span>Nova</span></span>
+                    </a>
+
+                    <div class="header__search">
+                        <form class="search-form" action="catalog.html" method="GET">
+                            <div class="search-form__input-wrapper">
+                                <input type="search" name="search" class="search-form__input" placeholder="Поиск товаров..." autocomplete="off">
+                                <div class="search-form__suggestions"></div>
+                            </div>
+                            <button type="submit" class="search-form__button" aria-label="Искать">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="M21 21l-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="header__actions">
+                        <a href="favorites.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span class="header__action-badge" data-favorites-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                        <a href="cart.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <span class="header__action-badge" data-cart-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="header__nav">
+                <div class="container">
+                    <div class="nav-categories">
+                        <button class="nav-categories__toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                            Каталог товаров
+                        </button>
+                        <div class="nav-categories__menu">
+                            <ul class="nav-categories__list" id="nav-categories-list"></ul>
+                        </div>
+                    </div>
+                    <nav class="nav-main">
+                        <a href="catalog.html" class="nav-main__link">Все товары</a>
+                        <a href="catalog.html?badges=sale" class="nav-main__link nav-main__link--highlight">Распродажа</a>
+                        <a href="catalog.html?badges=new" class="nav-main__link">Новинки</a>
+                        <a href="catalog.html?badges=bestseller" class="nav-main__link">Хиты продаж</a>
+                    </nav>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Mobile menu -->
+        <div class="mobile-menu">
+            <div class="mobile-menu__header">
+                <span class="header__logo-text">Auto<span>Nova</span></span>
+                <button class="mobile-menu__close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+            </div>
+            <nav class="mobile-menu__nav">
+                <a href="catalog.html" class="mobile-menu__link">Каталог</a>
+                <a href="favorites.html" class="mobile-menu__link">Избранное</a>
+                <a href="cart.html" class="mobile-menu__link">Корзина</a>
+            </nav>
+        </div>
+
+        <!-- ===== Main ===== -->
+        <main class="main-content">
+            <div class="container">
+                <nav class="breadcrumbs" id="product-breadcrumbs">
+                    <span class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Главная</a><span class="breadcrumbs__separator">/</span></span>
+                    <span class="breadcrumbs__item"><a href="catalog.html" class="breadcrumbs__link">Каталог</a><span class="breadcrumbs__separator">/</span></span>
+                    <span class="breadcrumbs__item"><span class="breadcrumbs__current">Товар</span></span>
+                </nav>
+
+                <div class="product-page">
+                    <!-- Meta strip -->
+                    <div class="product-meta-strip" id="product-meta-strip">
+                        <div class="product-meta-strip__item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span>Оригинальный товар</span>
+                        </div>
+                        <div class="product-meta-strip__item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                            <span>Быстрая доставка по России</span>
+                        </div>
+                        <div class="product-meta-strip__item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                            <span>Возврат в течение 14 дней</span>
+                        </div>
+                    </div>
+
+                    <!-- Main -->
+                    <div class="product-main">
+                        <!-- Gallery -->
+                        <div class="product-gallery">
+                            <div class="product-gallery__wrapper">
+                                <div class="product-gallery__thumbs-vertical" id="product-thumbs-vertical"></div>
+
+                                <div class="product-gallery__main-box">
+                                    <div class="product-gallery__main">
+                                        <img src="" alt="" class="product-gallery__main-image" id="product-main-image">
+                                        <div class="product-gallery__badges" id="product-badges"></div>
+                                        <div class="product-gallery__actions">
+                                            <button class="product-gallery__action" id="favorite-top-btn" data-toggle-favorite="">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                            </button>
+                                            <button class="product-gallery__action" id="share-btn">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="product-gallery__footer">
+                                        <div class="product-gallery__footer-item">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><image href=""></image><path d="M15 3h4a2 2 0 0 1 2 2v4"></path><path d="M9 21H5a2 2 0 0 1-2-2v-4"></path><path d="M3 9V5a2 2 0 0 1 2-2h4"></path><path d="M21 15v4a2 2 0 0 1-2 2h-4"></path></svg>
+                                            <span>Нажмите для увеличения</span>
+                                        </div>
+                                        <div class="product-gallery__footer-item">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                            <span>Есть вопросы? Напишите нам</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="product-gallery__thumbnails" id="product-thumbs-mobile"></div>
+                        </div>
+
+                        <!-- Info -->
+                        <div class="product-info">
+                            <a href="#" class="product-info__brand-link" id="product-brand-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><circle cx="12" cy="12" r="10"></circle><path d="M16 8l-8 8"></path></svg>
+                                <span id="product-brand-name">Бренд</span>
+                            </a>
+
+                            <h1 class="product-info__title" id="product-title"></h1>
+                            <p class="product-info__subtitle" id="product-subtitle"></p>
+
+                            <div class="product-info__top-row">
+                                <span class="product-info__sku">Артикул: <strong id="product-sku"></strong></span>
+                                <div class="product-info__meta-links">
+                                    <a href="#reviews" class="product-info__meta-link" id="scroll-to-reviews-link">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                        Отзывы
+                                    </a>
+                                    <button class="product-info__meta-link" id="copy-sku-btn" style="background:none;border:none;cursor:pointer;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                        Скопировать артикул
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="product-rating-box">
+                                <div class="product-rating-box__score">
+                                    <div class="product-rating-box__stars" id="product-rating-stars"></div>
+                                    <span id="product-rating-value"></span>
+                                </div>
+                                <a href="#reviews" class="product-rating-box__reviews" id="product-rating-count"></a>
+                                <span class="product-rating-box__sold" id="product-sold-text">Купили 250+ раз</span>
+                            </div>
+
+                            <div class="product-price-box">
+                                <div class="product-price-box__row">
+                                    <span class="product-price-box__current" id="product-price-current"></span>
+                                    <span class="product-price-box__original" id="product-price-original" style="display:none;"></span>
+                                    <span class="product-price-box__discount" id="product-price-discount" style="display:none;"></span>
+                                </div>
+                                <div class="product-price-box__savings" id="product-price-savings" style="display:none;"></div>
+                                <div class="product-price-box__credit">
+                                    Или от <strong id="product-credit-price">0 ₽/мес</strong> в рассрочку без переплат
+                                </div>
+                            </div>
+
+                            <div class="product-stock-box" id="product-stock-box">
+                                <div class="product-stock-box__left">
+                                    <span class="product-stock-box__dot"></span>
+                                    <div>
+                                        <div class="product-stock-box__status" id="product-stock-status">В наличии</div>
+                                        <div class="product-stock-box__hint" id="product-stock-hint">Можно заказать прямо сейчас</div>
+                                    </div>
+                                </div>
+                                <div class="product-stock-box__delivery">
+                                    Доставка: <strong id="product-delivery-estimate">1-3 дня</strong>
+                                </div>
+                            </div>
+
+                            <div class="product-features-box">
+                                <h3 class="product-features-box__title">Ключевые преимущества</h3>
+                                <div class="product-features-box__list" id="product-features-list"></div>
+                            </div>
+
+                            <div class="purchase-box">
+                                <div class="purchase-box__row">
+                                    <span class="purchase-box__quantity-label">Количество</span>
+                                    <div class="quantity-selector quantity-selector--lg">
+                                        <button class="quantity-selector__btn" id="qty-decrease">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                        </button>
+                                        <input type="number" class="quantity-selector__input" value="1" min="1" max="99" id="product-qty-input">
+                                        <button class="quantity-selector__btn" id="qty-increase">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="purchase-box__buttons">
+                                    <button type="button" class="btn btn--primary purchase-box__main-btn" id="product-add-to-cart-btn" data-add-to-cart="">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                        Добавить в корзину
+                                    </button>
+                                    <button type="button" class="btn btn--outline purchase-box__remove-btn cart-remove-inline" id="product-remove-from-cart-btn" data-cart-remove="" hidden aria-hidden="true">Убрать из корзины</button>
+
+                                    <div class="purchase-box__secondary">
+                                        <button class="btn btn--outline" id="product-favorite-btn" data-toggle-favorite="">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                            В избранное
+                                        </button>
+                                        <button class="btn btn--outline" id="product-compare-btn">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                            Сравнить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-box">
+                                <div class="service-box__item">
+                                    <div class="service-box__icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                                    </div>
+                                    <div>
+                                        <div class="service-box__title">Бесплатная доставка</div>
+                                        <div class="service-box__text">При заказе от 5 000 ₽ — по всей России</div>
+                                    </div>
+                                </div>
+                                <div class="service-box__item">
+                                    <div class="service-box__icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                                    </div>
+                                    <div>
+                                        <div class="service-box__title">Возврат 14 дней</div>
+                                        <div class="service-box__text">Если товар не подошёл — вернём деньги</div>
+                                    </div>
+                                </div>
+                                <div class="service-box__item">
+                                    <div class="service-box__icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <div class="service-box__title">Гарантия качества</div>
+                                        <div class="service-box__text">Только оригинальная продукция от проверенных брендов</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bundle -->
+                    <section class="product-bundle" id="product-bundle-section" style="display:none;">
+                        <h2 class="product-bundle__title">Часто покупают вместе</h2>
+                        <div class="product-bundle__row" id="product-bundle-row"></div>
+                    </section>
+
+                    <!-- Tabs -->
+                    <div class="product-tabs">
+                        <div class="product-tabs__nav">
+                            <button class="product-tabs__tab active" data-tab="description">Описание</button>
+                            <button class="product-tabs__tab" data-tab="specifications">Характеристики</button>
+                            <button class="product-tabs__tab" data-tab="reviews">Отзывы <span id="reviews-tab-count"></span></button>
+                        </div>
+
+                        <div class="product-tabs__panel active" id="tab-description">
+                            <div class="product-description__text" id="product-description-text"></div>
+                        </div>
+
+                        <div class="product-tabs__panel" id="tab-specifications">
+                            <div class="specifications-grid" id="product-specs-grid"></div>
+                        </div>
+
+                        <div class="product-tabs__panel" id="tab-reviews">
+                            <div class="reviews-layout">
+                                <aside class="reviews-summary-card">
+                                    <div class="reviews-summary-card__score">
+                                        <div class="reviews-summary-card__value" id="reviews-score-value">0.0</div>
+                                        <div class="reviews-summary-card__stars" id="reviews-score-stars"></div>
+                                        <div class="reviews-summary-card__count" id="reviews-score-count">0 отзывов</div>
+                                    </div>
+                                    <div class="reviews-bars" id="reviews-bars"></div>
+                                    <button class="btn btn--primary btn--block" id="write-review-btn">Оставить отзыв</button>
+                                </aside>
+
+                                <div class="reviews-list">
+                                    <div class="reviews-list__header">
+                                        <h3 class="reviews-list__title">Отзывы покупателей</h3>
+                                        <select class="form-input form-select" id="reviews-sort-select" style="max-width: 220px; height: 40px;">
+                                            <option value="newest">Сначала новые</option>
+                                            <option value="helpful">По полезности</option>
+                                            <option value="highest">С высоким рейтингом</option>
+                                            <option value="lowest">С низким рейтингом</option>
+                                        </select>
+                                    </div>
+                                    <div class="reviews-list__items" id="reviews-list-items"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related -->
+                    <section class="related-products">
+                        <h2 class="related-products__title">Похожие товары</h2>
+                        <div class="related-products__grid" id="related-products-grid"></div>
+                    </section>
+
+                    <!-- Recently viewed -->
+                    <section class="recently-viewed" id="recently-viewed-section" style="display:none;">
+                        <h2 class="recently-viewed__title">Недавно просмотренные</h2>
+                        <div class="recently-viewed__grid" id="recently-viewed-grid"></div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__main">
+                <div class="container">
+                    <div class="footer__grid">
+                        <div class="footer__column footer__column--about">
+                            <a href="index.html" class="footer__logo"><span class="footer__logo-text">Auto<span>Nova</span></span></a>
+                            <p class="footer__about-text">Интернет-магазин автоаксессуаров с 2015 года. Более 10 000 товаров для вашего автомобиля.</p>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Каталог</h4>
+                            <ul class="footer__links">
+                                <li><a href="catalog.html">Все товары</a></li>
+                                <li><a href="catalog.html?badges=sale">Скидки</a></li>
+                                <li><a href="catalog.html?badges=new">Новинки</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Покупателям</h4>
+                            <ul class="footer__links">
+                                <li><a href="delivery.html">Доставка и оплата</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Контакты</h4>
+                            <ul class="footer__contacts">
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <a href="tel:+78001234567">8 (800) 123-45-67</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="container"><p class="footer__copyright">© 2024 AutoNova. Все права защищены.</p></div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Данные -->
+    <script src="js/data/brands.js"></script>
+    <script src="js/data/products.js"></script>
+    <script src="js/data/categories.js"></script>
+    <script src="js/data/reviews.js"></script>
+
+    <!-- Утилиты -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/formatters.js"></script>
+
+    <!-- Ядро -->
+    <script src="js/core/storage.js"></script>
+    <script src="js/core/app.js"></script>
+
+    <!-- Модули -->
+    <script src="js/modules/notifications.js"></script>
+    <script src="js/modules/cart.js"></script>
+    <script src="js/modules/favorites.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof Notifications !== 'undefined') Notifications.init();
+
+        const params = new URLSearchParams(window.location.search);
+        const productId = parseInt(params.get('id')) || 1;
+        const product = ProductsDB.getById(productId);
+
+        if (!product) {
+            document.querySelector('.product-page').innerHTML = `
+                <div class="catalog-no-results">
+                    <div class="catalog-no-results__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                    </div>
+                    <h2 class="catalog-no-results__title">Товар не найден</h2>
+                    <p class="catalog-no-results__text">Возможно, он был удалён или ссылка некорректна.</p>
+                    <a href="catalog.html" class="btn btn--primary">Перейти в каталог</a>
+                </div>
+            `;
+            return;
+        }
+
+        document.title = `${product.name} - AutoNova`;
+
+        // Add to recently viewed
+        const viewed = Storage.getRecentlyViewed ? Storage.getRecentlyViewed() : Storage.get('autonova_recently_viewed', []);
+        if (Storage.addToRecentlyViewed) {
+            Storage.addToRecentlyViewed(product.id);
+        } else {
+            const list = [product.id, ...viewed.filter(id => id !== product.id)].slice(0, 8);
+            Storage.set('autonova_recently_viewed', list);
+        }
+
+        const category = CategoriesDB.getById(product.categoryId);
+        const brand = BrandsDB.getById(product.brandId);
+
+        // Breadcrumbs
+        document.getElementById('product-breadcrumbs').innerHTML = `
+            <span class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Главная</a><span class="breadcrumbs__separator">/</span></span>
+            <span class="breadcrumbs__item"><a href="catalog.html" class="breadcrumbs__link">Каталог</a><span class="breadcrumbs__separator">/</span></span>
+            ${category ? `<span class="breadcrumbs__item"><a href="catalog.html?category=${category.slug}" class="breadcrumbs__link">${category.name}</a><span class="breadcrumbs__separator">/</span></span>` : ''}
+            <span class="breadcrumbs__item"><span class="breadcrumbs__current">${product.name}</span></span>
+        `;
+
+        // Brand / basic info
+        document.getElementById('product-brand-name').textContent = brand ? brand.name : 'Бренд';
+        document.getElementById('product-brand-link').href = brand ? `catalog.html?brands=${brand.id}` : '#';
+        document.getElementById('product-title').textContent = product.name;
+        document.getElementById('product-subtitle').textContent = product.shortDescription || product.description;
+        document.getElementById('product-sku').textContent = product.sku;
+
+        // Rating
+        function renderStars(rating, size = 18) {
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                html += `<svg viewBox="0 0 24 24" style="width:${size}px;height:${size}px;${i > Math.round(rating) ? 'fill: var(--color-rating-empty);' : ''}"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>`;
+            }
+            return html;
+        }
+
+        document.getElementById('product-rating-stars').innerHTML = renderStars(product.rating, 18);
+        document.getElementById('product-rating-value').textContent = product.rating.toFixed(1);
+        document.getElementById('product-rating-count').textContent = `${product.reviewsCount} ${Helpers.pluralize(product.reviewsCount, ['отзыв', 'отзыва', 'отзывов'])}`;
+
+        // Price
+        document.getElementById('product-price-current').textContent = Formatters.price(product.price);
+        if (product.originalPrice && product.originalPrice > product.price) {
+            document.getElementById('product-price-original').style.display = '';
+            document.getElementById('product-price-original').textContent = Formatters.price(product.originalPrice);
+            document.getElementById('product-price-discount').style.display = '';
+            document.getElementById('product-price-discount').textContent = `-${product.discount}%`;
+            document.getElementById('product-price-savings').style.display = '';
+            document.getElementById('product-price-savings').textContent = `Вы экономите ${Formatters.price(product.originalPrice - product.price)}`;
+        }
+        document.getElementById('product-credit-price').textContent = Formatters.price(Math.round(product.price / 12));
+
+        // Stock
+        const stockBox = document.getElementById('product-stock-box');
+        if (product.stockStatus === 'low_stock') {
+            stockBox.classList.add('product-stock-box--low-stock');
+            document.getElementById('product-stock-status').textContent = `Осталось ${product.stock} шт.`;
+            document.getElementById('product-stock-hint').textContent = 'Рекомендуем оформить заказ сегодня';
+            document.getElementById('product-add-to-cart-btn').removeAttribute('data-product-unavailable');
+        } else if (product.stockStatus === 'out_of_stock') {
+            stockBox.classList.add('product-stock-box--out-of-stock');
+            document.getElementById('product-stock-status').textContent = 'Нет в наличии';
+            document.getElementById('product-stock-hint').textContent = 'Оставьте товар в избранном, чтобы следить за поступлением';
+            const addOut = document.getElementById('product-add-to-cart-btn');
+            addOut.setAttribute('data-product-unavailable', '');
+            addOut.disabled = true;
+            addOut.textContent = 'Нет в наличии';
+        } else {
+            stockBox.classList.add('product-stock-box--in-stock');
+            document.getElementById('product-stock-status').textContent = 'В наличии';
+            document.getElementById('product-stock-hint').textContent = `Доступно: ${product.stock} шт.`;
+            document.getElementById('product-add-to-cart-btn').removeAttribute('data-product-unavailable');
+        }
+
+        // Main image
+        const images = product.images && product.images.length ? product.images : [{ url: '', alt: product.name }];
+        let currentImage = 0;
+
+        function setImage(index) {
+            currentImage = index;
+            document.getElementById('product-main-image').src = images[index].url;
+            document.getElementById('product-main-image').alt = images[index].alt || product.name;
+
+            document.querySelectorAll('.product-gallery__thumb').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        }
+
+        const thumbsVertical = document.getElementById('product-thumbs-vertical');
+        const thumbsMobile = document.getElementById('product-thumbs-mobile');
+
+        thumbsVertical.innerHTML = images.map((img, i) => `
+            <button class="product-gallery__thumb ${i === 0 ? 'active' : ''}" data-image-index="${i}">
+                <img src="${img.url}" alt="${img.alt || product.name}">
+            </button>
+        `).join('');
+
+        thumbsMobile.innerHTML = images.map((img, i) => `
+            <button class="product-gallery__thumb ${i === 0 ? 'active' : ''}" data-image-index="${i}">
+                <img src="${img.url}" alt="${img.alt || product.name}">
+            </button>
+        `).join('');
+
+        document.querySelectorAll('.product-gallery__thumb').forEach(btn => {
+            btn.addEventListener('click', function() {
+                setImage(parseInt(this.dataset.imageIndex));
+            });
+        });
+
+        setImage(0);
+
+        // Badges
+        const badges = document.getElementById('product-badges');
+        badges.innerHTML = (product.badges || []).map(badge => {
+            if (badge === 'sale') return `<span class="product-gallery__badge product-gallery__badge--sale">-${product.discount}%</span>`;
+            if (badge === 'new') return `<span class="product-gallery__badge product-gallery__badge--new">Новинка</span>`;
+            if (badge === 'bestseller') return `<span class="product-gallery__badge product-gallery__badge--bestseller">Хит продаж</span>`;
+            return '';
+        }).join('');
+
+        // Features
+        const featuresList = document.getElementById('product-features-list');
+        featuresList.innerHTML = (product.features || []).slice(0, 6).map(feature => `
+            <div class="product-features-box__item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>${feature}</span>
+            </div>
+        `).join('');
+
+        // Description
+        document.getElementById('product-description-text').innerHTML = `
+            <p>${product.description}</p>
+            ${product.features?.length ? `
+                <p><strong>Основные преимущества:</strong></p>
+                <ul>
+                    ${product.features.map(f => `<li>${f}</li>`).join('')}
+                </ul>
+            ` : ''}
+        `;
+
+        // Specs
+        const specsGrid = document.getElementById('product-specs-grid');
+        specsGrid.innerHTML = (product.specifications || []).map(spec => `
+            <div class="spec-card">
+                <span class="spec-card__label">${spec.name}</span>
+                <span class="spec-card__value">${spec.value}</span>
+            </div>
+        `).join('');
+
+        // Tabs
+        document.querySelectorAll('.product-tabs__tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.product-tabs__tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.product-tabs__panel').forEach(p => p.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Qty
+        const qtyInput = document.getElementById('product-qty-input');
+        document.getElementById('qty-decrease').addEventListener('click', () => {
+            qtyInput.value = Math.max(1, parseInt(qtyInput.value || 1) - 1);
+        });
+        document.getElementById('qty-increase').addEventListener('click', () => {
+            qtyInput.value = Math.min(product.stock || 99, parseInt(qtyInput.value || 1) + 1);
+        });
+
+        // Cart / favorite
+        const addBtn = document.getElementById('product-add-to-cart-btn');
+        const removeCartBtn = document.getElementById('product-remove-from-cart-btn');
+        const favBtn = document.getElementById('product-favorite-btn');
+        const favTopBtn = document.getElementById('favorite-top-btn');
+
+        addBtn.dataset.addToCart = product.id;
+        if (removeCartBtn) {
+            removeCartBtn.dataset.cartRemove = product.id;
+        }
+        favBtn.dataset.toggleFavorite = product.id;
+        favTopBtn.dataset.toggleFavorite = product.id;
+
+        Cart.syncAddToCartButtons();
+
+        const isFav = Storage.isFavorite ? Storage.isFavorite(product.id) : (Storage.getFavorites?.() || []).includes(product.id);
+        if (isFav) {
+            favBtn.classList.add('active');
+            favTopBtn.classList.add('active');
+            favBtn.querySelector('svg').setAttribute('fill', 'currentColor');
+            favTopBtn.querySelector('svg').setAttribute('fill', 'currentColor');
+        }
+
+        addBtn.addEventListener('click', function() {
+            this.dataset.quantity = parseInt(qtyInput.value || 1);
+        });
+
+        document.getElementById('copy-sku-btn')?.addEventListener('click', async function() {
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(product.sku);
+                Notifications.success('Артикул скопирован');
+            }
+        });
+
+        document.getElementById('share-btn')?.addEventListener('click', async function() {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: product.name,
+                        text: product.shortDescription || product.name,
+                        url: window.location.href
+                    });
+                } catch (e) {}
+            } else if (navigator.clipboard) {
+                await navigator.clipboard.writeText(window.location.href);
+                Notifications.success('Ссылка на товар скопирована');
+            }
+        });
+
+        document.getElementById('product-compare-btn')?.addEventListener('click', function() {
+            Notifications.info('Функция сравнения может быть подключена дополнительно');
+        });
+
+        // Reviews
+        const reviews = ReviewsDB.getByProductId(product.id).reviews || [];
+        const stats = ReviewsDB.getRatingStats(product.id);
+        document.getElementById('reviews-tab-count').textContent = `(${stats.total})`;
+        document.getElementById('reviews-score-value').textContent = stats.average;
+        document.getElementById('reviews-score-stars').innerHTML = renderStars(parseFloat(stats.average), 18);
+        document.getElementById('reviews-score-count').textContent = `${stats.total} ${Helpers.pluralize(stats.total, ['отзыв', 'отзыва', 'отзывов'])}`;
+
+        const bars = document.getElementById('reviews-bars');
+        bars.innerHTML = [5,4,3,2,1].map(r => `
+            <div class="reviews-bars__row">
+                <span>${r}★</span>
+                <div class="reviews-bars__bar"><div class="reviews-bars__fill" style="width:${stats.distributionPercent?.[r] || 0}%"></div></div>
+                <span>${stats.distribution?.[r] || 0}</span>
+            </div>
+        `).join('');
+
+        document.getElementById('reviews-list-items').innerHTML = reviews.length ? reviews.map(review => {
+            const initials = review.userName.split(' ').map(i => i[0]).join('').toUpperCase();
+            return `
+                <div class="review-card">
+                    <div class="review-card__header">
+                        <div class="review-card__author">
+                            <div class="review-card__avatar">${initials}</div>
+                            <div>
+                                <div class="review-card__author-name">${review.userName}</div>
+                                <div class="review-card__author-meta">
+                                    <span>${Formatters.relativeTime(review.createdAt)}</span>
+                                    ${review.isVerifiedPurchase ? `
+                                        <span class="review-card__verified">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                            Подтверждённая покупка
+                                        </span>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card__rating">${renderStars(review.rating, 16)}</div>
+                    </div>
+                    ${review.title ? `<div class="review-card__title">${review.title}</div>` : ''}
+                    <div class="review-card__text">${review.text}</div>
+                    <div class="review-card__footer">
+                        <div class="review-card__helpful">
+                            <span>Полезен отзыв?</span>
+                            <button class="review-card__helpful-btn" data-review-helpful="${review.id}">
+                                👍 ${review.helpfulCount}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('') : `
+            <div class="catalog-no-results" style="grid-column: auto;">
+                <div class="catalog-no-results__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <h3 class="catalog-no-results__title">Пока нет отзывов</h3>
+                <p class="catalog-no-results__text">Будьте первым, кто поделится впечатлением о товаре.</p>
+            </div>
+        `;
+
+        document.getElementById('write-review-btn')?.addEventListener('click', function() {
+            Notifications.info('Форма отзыва может быть подключена дополнительно');
+        });
+
+        // Related
+        function renderMiniProductCard(p) {
+            const inCart = Cart.hasItem(p.id);
+            const isFavorite = Storage.isFavorite ? Storage.isFavorite(p.id) : false;
+            return `
+                <div class="product-card">
+                    <div class="product-card__image-wrapper">
+                        <a href="product.html?id=${p.id}">
+                            <img src="${p.images[0]?.url || ''}" alt="${p.name}" class="product-card__image">
+                        </a>
+                        <div class="product-card__actions">
+                            <button class="product-card__action ${isFavorite ? 'active' : ''}" data-toggle-favorite="${p.id}">
+                                <svg viewBox="0 0 24 24" fill="${isFavorite ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card__content">
+                        <a href="product.html?id=${p.id}" class="product-card__title">${p.name}</a>
+                        <div class="product-card__price">
+                            <span class="product-card__price-current">${Formatters.price(p.price)}</span>
+                            ${p.originalPrice ? `<span class="product-card__price-original">${Formatters.price(p.originalPrice)}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="product-card__footer">
+                        <div class="product-card__cart-actions">
+                            <button type="button" class="btn btn--primary btn--sm btn--block ${inCart ? 'btn--success' : ''}" data-add-to-cart="${p.id}">
+                                ${inCart ? 'В корзине' : 'В корзину'}
+                            </button>
+                            <button type="button" class="btn btn--outline btn--sm btn--block cart-remove-inline" data-cart-remove="${p.id}" ${inCart ? '' : 'hidden'} aria-hidden="${inCart ? 'false' : 'true'}">Убрать из корзины</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        const related = ProductsDB.getRelated(product.id, 4);
+        document.getElementById('related-products-grid').innerHTML = related.map(renderMiniProductCard).join('');
+
+        const recentlyViewedIds = (Storage.getRecentlyViewed ? Storage.getRecentlyViewed() : Storage.get('autonova_recently_viewed', []))
+            .filter(id => id !== product.id)
+            .slice(0, 4);
+
+        if (recentlyViewedIds.length) {
+            document.getElementById('recently-viewed-section').style.display = '';
+            const recentProducts = recentlyViewedIds.map(id => ProductsDB.getById(id)).filter(Boolean);
+            document.getElementById('recently-viewed-grid').innerHTML = recentProducts.map(renderMiniProductCard).join('');
+        }
+
+        // Bundle
+        const frequent = ProductsDB.getFrequentlyBoughtTogether(product.id, 2);
+        if (frequent.length >= 2) {
+            const section = document.getElementById('product-bundle-section');
+            const row = document.getElementById('product-bundle-row');
+            section.style.display = '';
+
+            const bundleProducts = [product, ...frequent.slice(0, 2)];
+            const bundleTotal = bundleProducts.reduce((sum, p) => sum + p.price, 0);
+            const bundleOriginal = bundleProducts.reduce((sum, p) => sum + (p.originalPrice || p.price), 0);
+
+            row.innerHTML = `
+                ${bundleProducts.map((p, i) => `
+                    <div class="product-bundle__item">
+                        <div class="product-bundle__image"><img src="${p.images[0]?.url || ''}" alt="${p.name}"></div>
+                        <div>
+                            <div class="product-bundle__name">${p.name}</div>
+                            <div class="product-bundle__price">${Formatters.price(p.price)}</div>
+                        </div>
+                    </div>
+                    ${i < bundleProducts.length - 1 ? `<div class="product-bundle__sign">+</div>` : ''}
+                `).join('')}
+                <div class="product-bundle__sign">=</div>
+                <div class="product-bundle__summary">
+                    <div class="product-bundle__summary-title">Комплектом</div>
+                    <div class="product-bundle__summary-price">${Formatters.price(bundleTotal)}</div>
+                    <div class="product-bundle__summary-savings">Экономия ${Formatters.price(bundleOriginal - bundleTotal)}</div>
+                    <button class="btn btn--primary btn--sm btn--block" id="bundle-add-btn">Добавить комплект</button>
+                </div>
+            `;
+
+            document.getElementById('bundle-add-btn')?.addEventListener('click', function() {
+                bundleProducts.forEach(p => Cart.addItem(p.id, 1));
+                Notifications.success('Комплект добавлен в корзину');
+            });
+        }
+
+        // Scroll to reviews
+        document.getElementById('scroll-to-reviews-link')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('[data-tab="reviews"]')?.click();
+            document.getElementById('tab-reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+    </script>
+</body>
+</html>

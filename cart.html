@@ -1,0 +1,1470 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Корзина покупок AutoNova. Оформите заказ с бесплатной доставкой от 5000 ₽.">
+    <title>Корзина - AutoNova</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23e94560' rx='15' width='100' height='100'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='50' font-weight='bold'>A</text></svg>">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/catalog.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        /* ===== Cart Page ===== */
+        .cart-page {
+            padding: var(--spacing-6) 0 var(--spacing-16);
+        }
+
+        .cart-page__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-6);
+        }
+
+        .cart-page__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .cart-page__count {
+            font-weight: var(--font-weight-normal);
+            color: var(--text-secondary);
+            font-size: var(--font-size-lg);
+        }
+
+        .cart-page__clear {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            transition: var(--transition-colors);
+        }
+
+        .cart-page__clear:hover {
+            color: var(--color-error);
+        }
+
+        .cart-page__clear svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ===== Free Delivery Progress ===== */
+        .free-delivery-bar {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+            padding: var(--spacing-4) var(--spacing-5);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-xl);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .free-delivery-bar__icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius-full);
+            flex-shrink: 0;
+        }
+
+        .free-delivery-bar__icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .free-delivery-bar__icon--complete {
+            background-color: var(--color-success);
+            color: var(--color-white);
+        }
+
+        .free-delivery-bar__icon--incomplete {
+            color: var(--color-warning);
+        }
+
+        .free-delivery-bar__content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .free-delivery-bar__text {
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .free-delivery-bar__text strong {
+            color: var(--color-accent);
+        }
+
+        .free-delivery-bar__progress {
+            width: 100%;
+            height: 6px;
+            background-color: var(--color-gray-200);
+            border-radius: var(--border-radius-full);
+            overflow: hidden;
+        }
+
+        .free-delivery-bar__progress-fill {
+            height: 100%;
+            border-radius: var(--border-radius-full);
+            transition: width 0.5s ease;
+        }
+
+        .free-delivery-bar__progress-fill--complete {
+            background-color: var(--color-success);
+        }
+
+        .free-delivery-bar__progress-fill--incomplete {
+            background-color: var(--color-warning);
+        }
+
+        /* ===== Cart Layout ===== */
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: var(--spacing-6);
+            align-items: start;
+        }
+
+        /* ===== Cart Items ===== */
+        .cart-items {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+        }
+
+        .cart-items__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-4) var(--spacing-5);
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .cart-items__select-all {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .cart-items__select-label {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .cart-items__actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+        }
+
+        .cart-items__action-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-colors);
+        }
+
+        .cart-items__action-btn:hover {
+            color: var(--color-error);
+        }
+
+        .cart-items__action-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ===== Cart Item ===== */
+        .cart-item {
+            display: grid;
+            grid-template-columns: auto 120px 1fr auto;
+            gap: var(--spacing-4);
+            padding: var(--spacing-5);
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition-colors);
+            align-items: start;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item:hover {
+            background-color: rgba(0, 0, 0, 0.01);
+        }
+
+        .cart-item__checkbox {
+            padding-top: var(--spacing-3);
+        }
+
+        .cart-item__image {
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        .cart-item__image-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .cart-item__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: var(--spacing-2);
+        }
+
+        .cart-item__image-badge {
+            position: absolute;
+            top: var(--spacing-1);
+            left: var(--spacing-1);
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: var(--font-weight-bold);
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .cart-item__content {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .cart-item__category {
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .cart-item__title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+            line-height: var(--line-height-snug);
+            margin-bottom: var(--spacing-2);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: var(--transition-colors);
+        }
+
+        .cart-item__title:hover {
+            color: var(--color-accent);
+        }
+
+        .cart-item__sku {
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .cart-item__attributes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .cart-item__attribute {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            padding: var(--spacing-1) var(--spacing-2);
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .cart-item__availability {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            font-size: var(--font-size-xs);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .cart-item__availability-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: var(--border-radius-full);
+        }
+
+        .cart-item__availability--in-stock .cart-item__availability-dot {
+            background-color: var(--color-success);
+        }
+        .cart-item__availability--in-stock .cart-item__availability-text {
+            color: var(--color-success);
+        }
+        .cart-item__availability--low-stock .cart-item__availability-dot {
+            background-color: var(--color-warning);
+        }
+        .cart-item__availability--low-stock .cart-item__availability-text {
+            color: var(--color-warning);
+        }
+
+        .cart-item__bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            margin-top: auto;
+        }
+
+        .cart-item__secondary-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+        }
+
+        .cart-item__action {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-colors);
+            padding: var(--spacing-1) 0;
+        }
+
+        .cart-item__action:hover {
+            color: var(--color-primary);
+        }
+
+        .cart-item__action.active {
+            color: var(--color-accent);
+        }
+
+        .cart-item__action.active svg {
+            fill: currentColor;
+        }
+
+        .cart-item__action svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .cart-item__action--remove:hover {
+            color: var(--color-error);
+        }
+
+        /* Right Column */
+        .cart-item__right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: var(--spacing-4);
+            min-width: 160px;
+        }
+
+        .cart-item__price {
+            text-align: right;
+        }
+
+        .cart-item__price-current {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .cart-item__price-original {
+            font-size: var(--font-size-sm);
+            color: var(--text-tertiary);
+            text-decoration: line-through;
+        }
+
+        .cart-item__price-per {
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+            margin-top: var(--spacing-1);
+        }
+
+        .cart-item__price-savings {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            padding: var(--spacing-1) var(--spacing-2);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+            background-color: rgba(233, 69, 96, 0.08);
+            border-radius: var(--border-radius-sm);
+            margin-top: var(--spacing-1);
+        }
+
+        .cart-item__price-savings svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Quantity */
+        .cart-item__quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Enhanced Quantity Selector */
+        .quantity-control {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            background-color: var(--bg-primary);
+        }
+
+        .quantity-control__btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-secondary);
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition-colors);
+        }
+
+        .quantity-control__btn:hover:not(:disabled) {
+            background-color: var(--color-gray-200);
+        }
+
+        .quantity-control__btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .quantity-control__btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .quantity-control__input {
+            width: 52px;
+            height: 40px;
+            text-align: center;
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            border: none;
+            border-left: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            background-color: var(--bg-primary);
+            -moz-appearance: textfield;
+        }
+
+        .quantity-control__input::-webkit-inner-spin-button,
+        .quantity-control__input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* ===== Cart Summary ===== */
+        .cart-summary {
+            position: sticky;
+            top: calc(var(--header-height) + var(--spacing-4));
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+        }
+
+        .cart-summary__header {
+            padding: var(--spacing-5);
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .cart-summary__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .cart-summary__content {
+            padding: var(--spacing-5);
+        }
+
+        .cart-summary__row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-3);
+        }
+
+        .cart-summary__label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .cart-summary__value {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+        }
+
+        .cart-summary__value--success {
+            color: var(--color-success);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .cart-summary__value--accent {
+            color: var(--color-accent);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .cart-summary__divider {
+            height: 1px;
+            background-color: var(--border-light);
+            margin: var(--spacing-4) 0;
+        }
+
+        .cart-summary__total {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-5);
+        }
+
+        .cart-summary__total-label {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+        }
+
+        .cart-summary__total-value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .cart-summary__total-savings {
+            font-size: var(--font-size-sm);
+            color: var(--color-success);
+            text-align: right;
+            margin-top: var(--spacing-1);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .cart-summary__checkout-btn {
+            width: 100%;
+            height: 52px;
+            font-size: var(--font-size-base);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .cart-summary__continue-btn {
+            width: 100%;
+        }
+
+        /* Promo Code */
+        .cart-promo {
+            padding: var(--spacing-4) var(--spacing-5);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .cart-promo__toggle {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            width: 100%;
+            padding: 0;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-primary);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart-promo__toggle svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-tertiary);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-promo.open .cart-promo__toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .cart-promo__form-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .cart-promo.open .cart-promo__form-wrapper {
+            max-height: 100px;
+        }
+
+        .cart-promo__form {
+            display: flex;
+            gap: var(--spacing-2);
+            padding-top: var(--spacing-3);
+        }
+
+        .cart-promo__input {
+            flex: 1;
+            height: 40px;
+            padding: 0 var(--spacing-3);
+            font-size: var(--font-size-sm);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-md);
+        }
+
+        .cart-promo__input:focus {
+            border-color: var(--color-primary);
+        }
+
+        .cart-promo__applied {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-3);
+            margin-top: var(--spacing-3);
+            background-color: rgba(76, 175, 80, 0.08);
+            border-radius: var(--border-radius-md);
+        }
+
+        .cart-promo__applied-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            color: var(--color-success);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .cart-promo__applied-info svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .cart-promo__applied-remove {
+            padding: var(--spacing-1);
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition-colors);
+        }
+
+        .cart-promo__applied-remove:hover {
+            color: var(--color-error);
+            background-color: rgba(244, 67, 54, 0.08);
+        }
+
+        .cart-promo__applied-remove svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Benefits */
+        .cart-benefits {
+            padding: var(--spacing-4) var(--spacing-5);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .cart-benefit {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .cart-benefit:last-child {
+            margin-bottom: 0;
+        }
+
+        .cart-benefit svg {
+            width: 16px;
+            height: 16px;
+            color: var(--color-success);
+            flex-shrink: 0;
+        }
+
+        /* Secure Badge */
+        .cart-secure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-3) var(--spacing-5);
+            border-top: 1px solid var(--border-light);
+            font-size: var(--font-size-xs);
+            color: var(--text-tertiary);
+        }
+
+        .cart-secure svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ===== Empty Cart ===== */
+        .cart-empty {
+            text-align: center;
+            padding: var(--spacing-16) var(--spacing-4);
+        }
+
+        .cart-empty__icon {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto var(--spacing-6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-full);
+            color: var(--color-gray-300);
+        }
+
+        .cart-empty__icon svg {
+            width: 64px;
+            height: 64px;
+        }
+
+        .cart-empty__title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .cart-empty__text {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-6);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: var(--line-height-relaxed);
+        }
+
+        .cart-empty__buttons {
+            display: flex;
+            gap: var(--spacing-3);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== Recommendations ===== */
+        .cart-recommendations {
+            margin-top: var(--spacing-12);
+        }
+
+        .cart-recommendations__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-6);
+        }
+
+        .cart-recommendations__title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+
+        .cart-recommendations__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-4);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1200px) {
+            .cart-layout {
+                grid-template-columns: 1fr 360px;
+            }
+
+            .cart-recommendations__grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cart-item {
+                grid-template-columns: auto 90px 1fr;
+                gap: var(--spacing-3);
+            }
+
+            .cart-item__right {
+                grid-column: 2 / -1;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                min-width: auto;
+            }
+
+            .cart-item__image {
+                width: 90px;
+                height: 90px;
+            }
+
+            .free-delivery-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cart-recommendations__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cart-page__header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-2);
+            }
+
+            .cart-item {
+                grid-template-columns: auto 1fr;
+                gap: var(--spacing-3);
+            }
+
+            .cart-item__checkbox {
+                grid-row: 1 / 3;
+            }
+
+            .cart-item__image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .cart-item__right {
+                grid-column: 1 / -1;
+                padding-left: calc(18px + var(--spacing-3));
+            }
+
+            .cart-item__content {
+                grid-column: auto;
+            }
+
+            .cart-items__header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-2);
+            }
+
+            .quantity-control__btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .quantity-control__input {
+                width: 44px;
+                height: 36px;
+                font-size: var(--font-size-sm);
+            }
+
+            .cart-promo__form {
+                flex-direction: column;
+            }
+
+            .cart-empty__buttons {
+                flex-direction: column;
+            }
+
+            .cart-empty__buttons .btn {
+                width: 100%;
+            }
+
+            .cart-recommendations__grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ===== Header ===== -->
+                <header class="header">
+            <div class="header__top-bar">
+                <div class="container">
+                    <div class="header__top-links">
+                        <a href="about.html" class="header__top-link">О компании</a>
+                        <a href="delivery.html" class="header__top-link">Доставка</a>
+                        <a href="contacts.html" class="header__top-link">Контакты</a>
+                    </div>
+                    <div class="header__promo">
+                        <span class="header__promo-text">🚗 Бесплатная доставка от 5000 ₽</span>
+                    </div>
+                    <div class="header__top-links">
+                        <a href="tel:+78001234567" class="header__top-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            8 (800) 123-45-67
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header__main">
+                <div class="container">
+                    <button class="header__mobile-toggle" aria-label="Меню">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+
+                    <a href="index.html" class="header__logo">
+                        <div class="header__logo-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M16 8l-8 8"></path>
+                                <path d="M8 8l8 8"></path>
+                            </svg>
+                        </div>
+                        <span class="header__logo-text">Auto<span>Nova</span></span>
+                    </a>
+
+                    <div class="header__search">
+                        <form class="search-form" action="catalog.html" method="GET">
+                            <div class="search-form__input-wrapper">
+                                <input type="search" name="search" class="search-form__input" placeholder="Поиск товаров..." autocomplete="off">
+                                <div class="search-form__suggestions"></div>
+                            </div>
+                            <button type="submit" class="search-form__button" aria-label="Искать">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="M21 21l-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="header__actions">
+                        <a href="favorites.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span class="header__action-badge" data-favorites-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                        <a href="cart.html" class="header__action">
+                            <div class="header__action-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <span class="header__action-badge" data-cart-count style="display:none;">0</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="header__nav">
+                <div class="container">
+                    <div class="nav-categories">
+                        <button class="nav-categories__toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                            Каталог товаров
+                        </button>
+                        <div class="nav-categories__menu">
+                            <ul class="nav-categories__list" id="nav-categories-list"></ul>
+                        </div>
+                    </div>
+                    <nav class="nav-main">
+                        <a href="catalog.html" class="nav-main__link">Все товары</a>
+                        <a href="catalog.html?badges=sale" class="nav-main__link nav-main__link--highlight">Распродажа</a>
+                        <a href="catalog.html?badges=new" class="nav-main__link">Новинки</a>
+                        <a href="catalog.html?badges=bestseller" class="nav-main__link">Хиты продаж</a>
+                    </nav>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ===== Mobile Menu ===== -->
+        <div class="mobile-menu">
+            <div class="mobile-menu__header">
+                <span class="header__logo-text">Auto<span>Nova</span></span>
+                <button class="mobile-menu__close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+            </div>
+            <nav class="mobile-menu__nav">
+                <a href="catalog.html" class="mobile-menu__link">Каталог</a>
+                <a href="favorites.html" class="mobile-menu__link">Избранное</a>
+                <a href="cart.html" class="mobile-menu__link">Корзина</a>
+            </nav>
+        </div>
+
+        <!-- ===== Main Content ===== -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Breadcrumbs -->
+                <nav class="breadcrumbs">
+                    <span class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Главная</a><span class="breadcrumbs__separator">/</span></span>
+                    <span class="breadcrumbs__item"><span class="breadcrumbs__current">Корзина</span></span>
+                </nav>
+
+                <div class="cart-page">
+                    <!-- Page Header -->
+                    <div class="cart-page__header">
+                        <h1 class="cart-page__title">
+                            Корзина
+                            <span class="cart-page__count" id="cart-header-count"></span>
+                        </h1>
+                        <button class="cart-page__clear" id="clear-cart-btn" style="display: none;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            Очистить корзину
+                        </button>
+                    </div>
+
+                    <!-- Free Delivery Bar -->
+                    <div class="free-delivery-bar" id="free-delivery-bar" style="display: none;">
+                        <div class="free-delivery-bar__icon" id="delivery-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                        </div>
+                        <div class="free-delivery-bar__content">
+                            <div class="free-delivery-bar__text" id="delivery-text"></div>
+                            <div class="free-delivery-bar__progress">
+                                <div class="free-delivery-bar__progress-fill" id="delivery-progress" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Content (rendered by JS) -->
+                    <div id="cart-content">
+                        <!-- Will be rendered by JavaScript -->
+                    </div>
+
+                    <!-- Recommendations -->
+                    <section class="cart-recommendations" id="cart-recommendations">
+                        <div class="cart-recommendations__header">
+                            <h2 class="cart-recommendations__title">Рекомендуем добавить</h2>
+                            <a href="catalog.html" class="section-link">Все товары →</a>
+                        </div>
+                        <div class="cart-recommendations__grid products-grid" data-products="featured">
+                            <!-- Loaded by JS -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== Footer ===== -->
+        <footer class="footer">
+            <div class="footer__main">
+                <div class="container">
+                    <div class="footer__grid">
+                        <div class="footer__column footer__column--about">
+                            <a href="index.html" class="footer__logo"><span class="footer__logo-text">Auto<span>Nova</span></span></a>
+                            <p class="footer__about-text">Интернет-магазин автоаксессуаров с 2015 года.</p>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Покупателям</h4>
+                            <ul class="footer__links">
+                                <li><a href="delivery.html">Доставка и оплата</a></li>
+                                <li><a href="about.html">О компании</a></li>
+                                <li><a href="contacts.html">Контакты</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer__column">
+                            <h4 class="footer__title">Контакты</h4>
+                            <ul class="footer__contacts">
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <a href="tel:+78001234567">8 (800) 123-45-67</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="container"><p class="footer__copyright">© 2024 AutoNova. Все права защищены.</p></div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== Scripts ===== -->
+    <!-- Данные -->
+    <script src="js/data/products.js"></script>
+    <script src="js/data/categories.js"></script>
+    <script src="js/data/reviews.js"></script>
+
+    <!-- Утилиты -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/formatters.js"></script>
+
+    <!-- Ядро -->
+    <script src="js/core/storage.js"></script>
+    <script src="js/core/app.js"></script>
+
+    <!-- Модули -->
+    <script src="js/modules/notifications.js"></script>
+    <script src="js/modules/cart.js"></script>
+    <script src="js/modules/favorites.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        renderCart();
+
+        // Listen for cart changes
+        window.addEventListener('cart:add', renderCart);
+        window.addEventListener('cart:remove', renderCart);
+        window.addEventListener('cart:update', renderCart);
+        window.addEventListener('cart:clear', renderCart);
+
+        // Clear cart
+        document.getElementById('clear-cart-btn')?.addEventListener('click', function() {
+            if (confirm('Вы уверены, что хотите очистить корзину?')) {
+                Cart.clear();
+            }
+        });
+
+        function renderCart() {
+            const items = Cart.getItems();
+            const totals = Cart.calculateTotals();
+            const container = document.getElementById('cart-content');
+            const headerCount = document.getElementById('cart-header-count');
+            const clearBtn = document.getElementById('clear-cart-btn');
+            const deliveryBar = document.getElementById('free-delivery-bar');
+
+            // Update header count
+            if (headerCount) {
+                headerCount.textContent = items.length > 0 ? `(${Formatters.pluralize(totals.itemsCount, ['товар', 'товара', 'товаров'])})` : '';
+            }
+
+            if (clearBtn) {
+                clearBtn.style.display = items.length > 0 ? 'flex' : 'none';
+            }
+
+            // Empty cart
+            if (items.length === 0) {
+                if (deliveryBar) deliveryBar.style.display = 'none';
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </div>
+                        <h2 class="cart-empty__title">Корзина пуста</h2>
+                        <p class="cart-empty__text">Загляните в каталог, чтобы найти интересные товары для вашего автомобиля</p>
+                        <div class="cart-empty__buttons">
+                            <a href="catalog.html" class="btn btn--primary btn--lg">Перейти в каталог</a>
+                            <a href="catalog.html?badges=sale" class="btn btn--outline btn--lg">Распродажа</a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Free delivery bar
+            if (deliveryBar) {
+                deliveryBar.style.display = 'flex';
+                const threshold = 5000;
+                const progress = Math.min((totals.subtotal / threshold) * 100, 100);
+                const remaining = Math.max(0, threshold - totals.subtotal);
+                const isFree = remaining === 0;
+
+                const icon = document.getElementById('delivery-icon');
+                const text = document.getElementById('delivery-text');
+                const bar = document.getElementById('delivery-progress');
+
+                icon.className = `free-delivery-bar__icon ${isFree ? 'free-delivery-bar__icon--complete' : 'free-delivery-bar__icon--incomplete'}`;
+                bar.style.width = progress + '%';
+                bar.className = `free-delivery-bar__progress-fill ${isFree ? 'free-delivery-bar__progress-fill--complete' : 'free-delivery-bar__progress-fill--incomplete'}`;
+
+                if (isFree) {
+                    text.innerHTML = '🎉 Поздравляем! Вам доступна <strong>бесплатная доставка</strong>';
+                } else {
+                    text.innerHTML = `До бесплатной доставки осталось <strong>${Formatters.price(remaining)}</strong>`;
+                }
+            }
+
+            // Render cart layout
+            container.innerHTML = `
+                <div class="cart-layout">
+                    <!-- Items -->
+                    <div class="cart-items">
+                        <div class="cart-items__header">
+                            <label class="cart-items__select-all checkbox">
+                                <input type="checkbox" class="checkbox__input" checked id="select-all">
+                                <span class="checkbox__box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                                <span class="cart-items__select-label">Выбрать все</span>
+                            </label>
+                            <div class="cart-items__actions">
+                                <button class="cart-items__action-btn" id="delete-selected">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    Удалить выбранные
+                                </button>
+                            </div>
+                        </div>
+                        <div class="cart-items__list">
+                            ${items.map(item => renderCartItem(item)).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="cart-summary">
+                        <div class="cart-summary__header">
+                            <h2 class="cart-summary__title">Ваш заказ</h2>
+                        </div>
+                        <div class="cart-summary__content">
+                            <div class="cart-summary__row">
+                                <span class="cart-summary__label">${Formatters.pluralize(totals.itemsCount, ['товар', 'товара', 'товаров'])}</span>
+                                <span class="cart-summary__value">${Formatters.price(totals.originalTotal)}</span>
+                            </div>
+                            ${totals.productDiscount > 0 ? `
+                                <div class="cart-summary__row">
+                                    <span class="cart-summary__label">Скидка</span>
+                                    <span class="cart-summary__value cart-summary__value--accent">−${Formatters.price(totals.productDiscount)}</span>
+                                </div>
+                            ` : ''}
+                            ${totals.promoDiscount > 0 ? `
+                                <div class="cart-summary__row">
+                                    <span class="cart-summary__label">Промокод (${totals.promoCode})</span>
+                                    <span class="cart-summary__value cart-summary__value--accent">−${Formatters.price(totals.promoDiscount)}</span>
+                                </div>
+                            ` : ''}
+                            <div class="cart-summary__row">
+                                <span class="cart-summary__label">Доставка</span>
+                                <span class="cart-summary__value ${totals.deliveryFee === 0 ? 'cart-summary__value--success' : ''}">${totals.deliveryFee === 0 ? 'Бесплатно' : Formatters.price(totals.deliveryFee)}</span>
+                            </div>
+                            <div class="cart-summary__divider"></div>
+                            <div class="cart-summary__total">
+                                <span class="cart-summary__total-label">Итого</span>
+                                <span class="cart-summary__total-value">${Formatters.price(totals.total)}</span>
+                            </div>
+                            ${totals.productDiscount > 0 ? `
+                                <div class="cart-summary__total-savings">Вы экономите ${Formatters.price(totals.productDiscount + totals.promoDiscount)}</div>
+                            ` : ''}
+                            <button onclick="Cart.sendToTelegram()" class="btn btn--primary btn--lg cart-summary__checkout-btn">
+                                Оформить заказ в Telegram
+                            </button>
+                            <a href="catalog.html" class="btn btn--outline cart-summary__continue-btn">
+                                Продолжить покупки
+                            </a>
+                        </div>
+                        <!-- Promo -->
+                        <div class="cart-promo" id="cart-promo">
+                            <button class="cart-promo__toggle" id="promo-toggle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                Есть промокод?
+                            </button>
+                            <div class="cart-promo__form-wrapper">
+                                ${totals.promoCode ? `
+                                    <div class="cart-promo__applied">
+                                        <span class="cart-promo__applied-info">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                            ${totals.promoCode}
+                                        </span>
+                                        <button class="cart-promo__applied-remove" id="remove-promo">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        </button>
+                                    </div>
+                                ` : `
+                                    <form class="cart-promo__form" id="promo-form">
+                                        <input type="text" class="cart-promo__input" placeholder="Введите промокод" id="promo-input">
+                                        <button type="submit" class="btn btn--outline btn--sm">Применить</button>
+                                    </form>
+                                `}
+                            </div>
+                        </div>
+                        <!-- Benefits -->
+                        <div class="cart-benefits">
+                            <div class="cart-benefit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Бесплатная доставка от 5 000 ₽
+                            </div>
+                            <div class="cart-benefit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Возврат в течение 14 дней
+                            </div>
+                            <div class="cart-benefit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Гарантия на все товары
+                            </div>
+                        </div>
+                        <div class="cart-secure">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            Безопасная оплата • SSL защита
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Bind events after render
+            bindCartEvents();
+        }
+
+        function renderCartItem(item) {
+            const { product, quantity, subtotal } = item;
+            const originalPrice = product.originalPrice || product.price;
+            const hasDiscount = originalPrice > product.price;
+            const savings = hasDiscount ? (originalPrice - product.price) * quantity : 0;
+            const isFavorite = Storage.isFavorite(product.id);
+            const category = CategoriesDB.getById(product.categoryId);
+
+            let availClass = 'in-stock', availText = 'В наличии';
+            if (product.stockStatus === 'low_stock') { availClass = 'low-stock'; availText = `Осталось ${product.stock} шт.`; }
+
+            return `
+                <div class="cart-item" data-product-id="${product.id}">
+                    <div class="cart-item__checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox" class="checkbox__input cart-item-checkbox" checked data-id="${product.id}">
+                            <span class="checkbox__box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                        </label>
+                    </div>
+                    <div class="cart-item__image">
+                        <a href="product.html?id=${product.id}" class="cart-item__image-link">
+                            <img src="${product.images[0]?.url || ''}" alt="${product.name}">
+                            ${hasDiscount ? `<span class="cart-item__image-badge">-${product.discount}%</span>` : ''}
+                        </a>
+                    </div>
+                    <div class="cart-item__content">
+                        ${category ? `<span class="cart-item__category">${category.name}</span>` : ''}
+                        <a href="product.html?id=${product.id}" class="cart-item__title">${product.name}</a>
+                        <span class="cart-item__sku">Арт: ${product.sku}</span>
+                        <div class="cart-item__availability cart-item__availability--${availClass}">
+                            <span class="cart-item__availability-dot"></span>
+                            <span class="cart-item__availability-text">${availText}</span>
+                        </div>
+                        <div class="cart-item__bottom-row">
+                            <div class="cart-item__secondary-actions">
+                                <button class="cart-item__action ${isFavorite ? 'active' : ''}" data-toggle-favorite="${product.id}" title="В избранное">
+                                    <svg viewBox="0 0 24 24" fill="${isFavorite ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                    <span>В избранное</span>
+                                </button>
+                                <button class="cart-item__action cart-item__action--remove" data-cart-remove="${product.id}" title="Удалить">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    <span>Удалить</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-item__right">
+                        <div class="cart-item__price">
+                            <div class="cart-item__price-current">${Formatters.price(subtotal)}</div>
+                            ${hasDiscount ? `<div class="cart-item__price-original">${Formatters.price(originalPrice * quantity)}</div>` : ''}
+                            ${quantity > 1 ? `<div class="cart-item__price-per">${Formatters.price(product.price)} / шт.</div>` : ''}
+                            ${savings > 0 ? `
+                                <div class="cart-item__price-savings">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    Экономия ${Formatters.price(savings)}
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="cart-item__quantity">
+                            <div class="quantity-control">
+                                <button class="quantity-control__btn" data-cart-quantity="decrease" data-product-id="${product.id}" ${quantity <= 1 ? 'disabled' : ''}>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                </button>
+                                <input type="number" class="quantity-control__input" value="${quantity}" min="1" max="${Math.min(product.stock, 99)}" data-cart-quantity-input data-product-id="${product.id}">
+                                <button class="quantity-control__btn" data-cart-quantity="increase" data-product-id="${product.id}" ${quantity >= product.stock ? 'disabled' : ''}>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function bindCartEvents() {
+            // Promo toggle
+            document.getElementById('promo-toggle')?.addEventListener('click', function() {
+                document.getElementById('cart-promo')?.classList.toggle('open');
+            });
+
+            // Promo form
+            document.getElementById('promo-form')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const input = document.getElementById('promo-input');
+                if (input?.value.trim()) {
+                    Cart.applyPromoCode(input.value.trim());
+                }
+            });
+
+            // Remove promo
+            document.getElementById('remove-promo')?.addEventListener('click', function() {
+                Cart.removePromoCode();
+            });
+
+            // Delete selected
+            document.getElementById('delete-selected')?.addEventListener('click', function() {
+                const checked = document.querySelectorAll('.cart-item-checkbox:checked');
+                if (checked.length === 0) {
+                    Notifications.warning('Выберите товары для удаления');
+                    return;
+                }
+                if (confirm(`Удалить ${checked.length} товар(ов)?`)) {
+                    checked.forEach(cb => {
+                        Cart.removeItem(parseInt(cb.dataset.id));
+                    });
+                }
+            });
+
+            // Select all
+            document.getElementById('select-all')?.addEventListener('change', function() {
+                document.querySelectorAll('.cart-item-checkbox').forEach(cb => {
+                    cb.checked = this.checked;
+                });
+            });
+        }
+    });
+    </script>
+</body>
+</html>
